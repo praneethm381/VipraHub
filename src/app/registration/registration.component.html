@@ -1,3 +1,28 @@
-<p>
-  registration works!
-</p>
+<!--Html code for regiatration page-->
+<div class="col-6 float-right dp-flex">
+  <form autocomplete="off">
+    <div class="form-group">
+      <input type="text" class="form-control form-control-lg" name="firstname" placeholder="First Name" [(ngModel)]="user.firstname">
+    </div>
+
+    <div class="form-group">
+      <input type="text" class="form-control form-control-lg"  name="lastname" placeholder="Last Name" [(ngModel)]="user.lastname">
+    </div>
+
+    <div class="form-group">
+      <input type="text" class="form-control form-control-lg" name="username" placeholder="Email Id" [(ngModel)]="user.username">
+    </div>
+
+    <div class="form-group">
+      <input type="password" class="form-control form-control-lg"  name="password" placeholder="Password" [(ngModel)]="user.password">
+    </div>
+
+    <div class="form-group">
+      <button type="button" class="btn btn-success width-100" (click)="registerUser()">Register</button>
+    </div>
+    <div class="register-link-parent">
+      <a routerLink="/" class="register-link">Already signed up? Login Here</a>
+    </div>
+  </form>
+</div>
+
