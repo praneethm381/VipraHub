@@ -1,9 +1,7 @@
 .deepL
 {
   position: relative;
-  /*background-color: #343a40;*/
   background: linear-gradient(to top right, #99ccff 0%, #3366ff 100%);
-  /*background-repeat:no-repeat;*/
   background-size: cover;
   padding-top: 8rem;
   padding-bottom: 8rem;
@@ -39,4 +37,22 @@
   width: 100%;
   height:480px;
   float: left;
+}
+
+.modelBoxshadow{
+  -webkit-box-shadow: inset -1px 1px 5px 9px rgba(54,70,102,0.6);
+  -moz-box-shadow: inset -1px 1px 5px 9px rgba(54,70,102,0.6);
+  box-shadow: inset -1px 1px 5px 9px rgba(54,70,102,0.6);
+  height: 230px;
+}
+
+.modelresult{
+  color : white;
+  padding: 10px 10px 10px 10px;
+}
+
+.fixHeightModel
+{
+  height: 250px !important;
+  width: 200px;
 }
