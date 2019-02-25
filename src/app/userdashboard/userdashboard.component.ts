@@ -18,6 +18,23 @@ export class UserdashboardComponent implements OnInit {
   public barChartData: any[] = [
     {data: [65, 59, 80, 81, 70], label: 'No.of.Views'}
   ];
+   public chartColors: Array<any> = [
+    { // first color
+      backgroundColor: '#103063',
+      borderColor: 'rgba(225,10,24,0.2)',
+      pointBackgroundColor: 'rgba(225,10,24,0.2)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
+    },
+    { // second color
+      backgroundColor: 'rgba(225,10,24,0.2)',
+      borderColor: 'rgba(225,10,24,0.2)',
+      pointBackgroundColor: 'rgba(225,10,24,0.2)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
+    }];
 
   // events
   public chartClicked(e: any): void {
@@ -27,7 +44,6 @@ export class UserdashboardComponent implements OnInit {
   public chartHovered(e: any): void {
     console.log(e);
   }
-
   public randomize(): void {
     // Only Change 3 values
     const data = [
