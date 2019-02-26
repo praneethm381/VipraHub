@@ -10,7 +10,7 @@ export class LoginComponent implements OnInit {
 public emailid;
 public password;
 public InvalidUser = false;
-  constructor(private router: Router) { }
+  constructor(public router: Router) { }
 
   ngOnInit() {
   }
