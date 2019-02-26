@@ -73,3 +73,27 @@
 .flipswitch-cb:checked + .flipswitch-label .flipswitch-switch {
   right: 0;
 }/* You can add global styles to this file, and also import other style files */
+.dp-flex
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.login-bg
+{
+  height: 100vh;
+}
+.vipra-blue-button
+{
+  color: #ffffff;
+  background-color: #1c214b !important;
+  border-color: #1c214b !important;
+}
+.vipra-blue-text{
+  color:#1c214b !important
+}
+
+.width-100{
+  width:100%;
+}

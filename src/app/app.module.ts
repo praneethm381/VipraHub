@@ -14,6 +14,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { OrderModule } from 'ngx-order-pipe';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import {HttpClientModule} from '@angular/common/http';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {HttpClientModule} from '@angular/common/http';
     SlickCarouselModule,
     OrderModule,
     ChartsModule,
+    AngularFontAwesomeModule,
     HttpClientModule
   ],
   providers: [],
