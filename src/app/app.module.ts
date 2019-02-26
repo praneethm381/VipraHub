@@ -26,12 +26,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
   imports: [
     BrowserModule,
     AppRoutingModule,
-<<<<<<< HEAD
-    FormsModule
-=======
-    SlickCarouselModule
->>>>>>> 9b37b22226249f666cc7d958825d3271b2e6eba2
-  ],
+    FormsModule,
+    SlickCarouselModule],
   providers: [],
   bootstrap: [AppComponent]
 })
