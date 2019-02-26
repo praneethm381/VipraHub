@@ -22,4 +22,18 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should be able to login and navigate to home page', () => {
+    component.emailid = 'xyz@gmail.com';
+    component.password = '1234';
+    component.userlogin();
+    expect(component.router.navigate(['/home'])).toBeTruthy();
+  });
+
+  it('should not be able to login if password is wrong', () => {
+    component.emailid = 'xyz@gmail.com';
+    component.password = '23456';
+    component.userlogin();
+    expect(component.InvalidUser).toBeTruthy();
+  });
 });

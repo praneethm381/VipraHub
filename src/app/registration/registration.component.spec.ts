@@ -22,4 +22,14 @@ describe('RegistrationComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should be able to register', () => {
+    component.user.firstname = 'Neha';
+    component.user.lastname = 'Navgale';
+    component.user.username = 'xyz@gmail.com'
+    component.user.password = '1234'
+    component.registerUser();
+    expect(component.resetuser).toHaveBeenCalled();
+  });
+
 });
