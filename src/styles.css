@@ -84,3 +84,16 @@
 {
   height: 100vh;
 }
+.vipra-blue-button
+{
+  color: #ffffff;
+  background-color: #1c214b !important;
+  border-color: #1c214b !important;
+}
+.vipra-blue-text{
+  color:#1c214b !important
+}
+
+.width-100{
+  width:100%;
+}
