@@ -43,6 +43,6 @@
 {
   border: 1px;
   border-radius: 3px;
-  box-shadow: 0px 5px 8px 2px lightskyblue;
+  box-shadow: 0px 5px 8px 2px darkblue;
   transition: all 0.3s ease;
 }
