@@ -8,6 +8,9 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { SearchComponent } from './search/search.component';
 import { UserdashboardComponent } from './userdashboard/userdashboard.component';
+import { HomeHeaderComponent } from './home-header/home-header.component';
+import { HomeFooterComponent } from './home-footer/home-footer.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [
@@ -16,12 +19,18 @@ import { UserdashboardComponent } from './userdashboard/userdashboard.component'
     LoginComponent,
     RegistrationComponent,
     SearchComponent,
-    UserdashboardComponent
+    UserdashboardComponent,
+    HomeHeaderComponent,
+    HomeFooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+<<<<<<< HEAD
     FormsModule
+=======
+    SlickCarouselModule
+>>>>>>> 9b37b22226249f666cc7d958825d3271b2e6eba2
   ],
   providers: [],
   bootstrap: [AppComponent]
