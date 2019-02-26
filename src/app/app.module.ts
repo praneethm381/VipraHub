@@ -13,6 +13,9 @@ import { HomeHeaderComponent } from './home-header/home-header.component';
 import { HomeFooterComponent } from './home-footer/home-footer.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { OrderModule } from 'ngx-order-pipe';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { OrderModule } from 'ngx-order-pipe';
     AppRoutingModule,
     SlickCarouselModule,
     HttpClientModule,
-    OrderModule
+    OrderModule,
+    AngularFontAwesomeModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
