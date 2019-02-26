@@ -11,6 +11,9 @@ import { UserdashboardComponent } from './userdashboard/userdashboard.component'
 import { HomeHeaderComponent } from './home-header/home-header.component';
 import { HomeFooterComponent } from './home-footer/home-footer.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { OrderModule } from 'ngx-order-pipe';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,11 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    SlickCarouselModule],
+    SlickCarouselModule,
+    OrderModule,
+    ChartsModule,
+    HttpClientModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
