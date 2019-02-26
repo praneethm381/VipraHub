@@ -9,8 +9,8 @@ import {SearchComponent} from './search/search.component';
 import {UserdashboardComponent} from './userdashboard/userdashboard.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full'},
-  { path: 'home', component: HomeComponent},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'search', component: SearchComponent},

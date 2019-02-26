@@ -4,17 +4,17 @@
       <form>
         <div class="form-row">
           <div class="col-9">
-            <input type="search" class="form-control form-control-sm" placeholder="Search Models">
+            <input type="search" class="form-control form-control-sm" name="modelSearch" placeholder="Search Models">
           </div>
           <div class="col-3">
-            <button type="submit" class="btn btn-block btn-sm btn-primary">Search</button>
+            <button type="submit" class="btn btn-block btn-sm btn-primary" (click)="getResults()">Search</button>
           </div>
         </div>
       </form>
     </div>
   </div>
   <div class="row m-0">
-    <div  class="col-md-2 m-37" *ngFor="let modelData of (listOfModels | orderBy:'-AccuracyValue' )  | slice:1:4 " >
+    <div  class="col-md-2 m-37" *ngFor="let modelData of (listOfModels | orderBy:'-AccuracyValue' | filter:modelSearch)  | slice:1:4 " >
       <div class="fixHeightModel border-info p-lg-5" >
         <b>{{modelData.model_name}}</b>
         <div class="row">

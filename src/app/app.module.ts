@@ -15,6 +15,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { OrderModule } from 'ngx-order-pipe';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { FilterpipePipe } from './filterpipe.pipe';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     SearchComponent,
     UserdashboardComponent,
     HomeHeaderComponent,
-    HomeFooterComponent
+    HomeFooterComponent,
+    FilterpipePipe
   ],
   imports: [
     BrowserModule,
