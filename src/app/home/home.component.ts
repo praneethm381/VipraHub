@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Router} from '@angular/router';
+import { OrderModule } from 'ngx-order-pipe';
 
 @Component({
   selector: 'app-home',

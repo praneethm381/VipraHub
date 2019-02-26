@@ -6,11 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterpipePipe implements PipeTransform {
 
-  transform(items: any, filter: Object): any {
-    if (!items || !filter) {
-      return items;
-    }
-    return items.filter(value => value.title.indexOf(filter) !== -1);
+  transform(value: string, args?: any): any {
+    return null;
   }
 
 }
