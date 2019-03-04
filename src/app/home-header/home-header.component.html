@@ -5,8 +5,9 @@
         <a class="navbar-brand heading" href="/home">VipraHub</a>
       </div>
       <form class="form-inline mt-2 mt-md-0">
-        <a class="btn  form-control mr-sm-2" href="/registration">Sign Up</a>
-        <a class="btn  my-2 my-sm-0" href="/login">Log In</a>
+        <a class="btn  form-control mr-sm-2" href="/registration" [hidden]="hideSignup">Sign Up</a>
+        <a class="btn  my-2 my-sm-0" (click)="logInOut()">{{loginout}}</a>
+        <a class="btn  form-control mr-sm-2" href="/user" [hidden]="!hideSignup" (click)="userprofile()"> <i class="fa fa-user"></i></a>
       </form>
     </div>
   </nav>
