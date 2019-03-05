@@ -1,6 +1,14 @@
 .logo{
   width:60px;
 }
+header[role=banner] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  height: 75px;
+}
 .heading{
   font-family: Georgia, serif;
   font-size: 30px;
