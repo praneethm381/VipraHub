@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     try {
       console.log(this.user.email);
       const result = await this.ngAuth.auth.signInWithEmailAndPassword(this.user.email, this.user.password);
-      this.router.navigate(['home']);
+      this.router.navigate(['userdashboard']);
     } catch (err) {
       this.InvalidUser = true;
     }
