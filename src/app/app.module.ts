@@ -14,7 +14,10 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { OrderModule } from 'ngx-order-pipe';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import {HttpClientModule} from '@angular/common/http';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule} from '@angular/fire/auth';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -34,8 +37,10 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     SlickCarouselModule,
     OrderModule,
     ChartsModule,
-    AngularFontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
   ],
   providers: [],
   bootstrap: [AppComponent]

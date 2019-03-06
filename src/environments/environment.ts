@@ -3,8 +3,19 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+      apiKey: "AIzaSyC8lroupmAmIWNObPs7wohLvqcmY8z3JBg",
+      authDomain: "viprahub-97758.firebaseapp.com",
+      databaseURL: "https://viprahub-97758.firebaseio.com",
+      projectId: "viprahub-97758",
+      storageBucket: "viprahub-97758.appspot.com",
+      messagingSenderId: "730601298221"
+  }
 };
+
+
+
 
 /*
  * For easier debugging in development mode, you can import the following file

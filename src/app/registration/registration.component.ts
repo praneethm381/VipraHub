@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-registration',
@@ -7,37 +10,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrationComponent implements OnInit {
   user = {
-    'firstname': '',
-    'lastname': '',
-    'username': '',
-    'password': ''
-  };
-  constructor() {
-    this.resetuser();
-  }
-  resetuser() {
-    this.user = {
-      'firstname': '',
-      'lastname': '',
-      'username': '',
-      'password': ''
+     'firstname': '',
+     'lastname': '',
+     'email': '',
+     'password': '',
+     'cpassword': ''
     };
+
+  constructor(public ngAuth: AngularFireAuth, private router: Router) {
+    // this.resetuser();
   }
+  // resetuser() {
+  //   this.user = {
+  //     'firstname': '',
+  //     'lastname': '',
+  //     'username': '',
+  //     'password': '',
+  //     'cpassword': ''
+  //   };
+  // }
   ngOnInit() {
   }
   registerUser() {
-    let userInfo = {
-      'firstname': this.user.firstname,
-      'lastname': this.user.lastname,
-      'username': this.user.username,
-      'password': this.user.password
+
+    if (this.user.password !== this.user.cpassword) {
+      return console.error('Password don\'t match');
     }
-    // localStorage supported
-    if (window.localStorage) {
-      localStorage.setItem(userInfo.username, JSON.stringify(userInfo));
-      this.resetuser();
+    try {
+      const result = this.ngAuth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password)
+      this.router.navigate(['login']);
+    } catch (err) {
+      console.dir(err);
     }
+  }
 
   }
 
-}

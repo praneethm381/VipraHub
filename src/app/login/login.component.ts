@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {LoginService} from '../login.service';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-login',
@@ -8,25 +8,20 @@ import {LoginService} from '../login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-public emailid;
-public password;
-public InvalidUser = false;
-  constructor(public router: Router, private loginService: LoginService) { }
+  user = { email: '', password: '' };
+  InvalidUser = false;
+  constructor(public router: Router, public  ngAuth: AngularFireAuth) { }
 
   ngOnInit() {
   }
-  userlogin() {
-    let user = localStorage.getItem(this.emailid);
-    if (user != null) {
-      user = JSON.parse(user);
-      // @ts-ignore
-      if (this.password === user.password) {
-        this.loginService.firstName = user['firstname'];
-        this.loginService.secondName = user['lastname'];
-        this.loginService.email = this.emailid;
-        this.router.navigate(['/user']);
-      }
+  async userlogin() {
+    try {
+      console.log(this.user.email);
+      const result = await this.ngAuth.auth.signInWithEmailAndPassword(this.user.email, this.user.password);
+      this.router.navigate(['home']);
+    } catch (err) {
+      this.InvalidUser = true;
     }
-    this.InvalidUser = true;
-}
+  }
+
 }
