@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { map, filter } from 'rxjs/operators';
+import { OrderModule } from 'ngx-order-pipe';
 
 @Component({
   selector: 'app-search',
@@ -10,16 +11,16 @@ import { map, filter } from 'rxjs/operators';
 export class SearchComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
-  modelSearch;
   listOfModels;
-  ngOnInit() {
-  }
   getResults() {
     this.http.get('../../assets/modelData.json').
     subscribe(modelData => {
       this.listOfModels = modelData['models'];
       console.log(modelData['models']);
     }, error => {});
+  }
+  ngOnInit() {
+    this.getResults();
   }
 
 }
