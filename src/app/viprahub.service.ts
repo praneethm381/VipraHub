@@ -8,6 +8,7 @@ const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 const apiUrl = '/api';
+const apiUrlCategory = '/category';
 
 @Injectable({
   providedIn: 'root'
@@ -29,4 +30,40 @@ export class ViprahubService {
     // return an observable with a user-facing error message
     return throwError('Something bad happened; please try again later.');
   }
+
+  private extractData(res: Response) {
+    const body = res;
+    return body || {};
+  }
+
+  searchMetadataByCategory(categoryID: string): Observable<any> {
+    return this.http.get(`${apiUrl}/${categoryID}`, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+  postMetadata(data): Observable<any> {
+    return this.http.post(apiUrl, data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+  getMetadata(): Observable<any> {
+    return this.http.get(apiUrl, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+  createCategory(data): Observable<any> {
+    return this.http.post(apiUrlCategory, data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getCategory(): Observable<any> {
+    return this.http.get(apiUrlCategory, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
 }

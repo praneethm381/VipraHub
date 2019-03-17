@@ -1,6 +1,7 @@
 var express = require('express');
 var http = require('http');
 var apiRouter = require('./routes/viprahub');
+var apiRouterCategory = require('./routes/category');
 var path = require('path');
 
 var mongoose = require('mongoose');
@@ -21,6 +22,7 @@ app.use('/registration', express.static(path.join(__dirname, '../dist/viprahub')
 app.use('/userdashboard', express.static(path.join(__dirname, '../dist/viprahub')));
 
 app.use('/api', apiRouter);
+app.use('/category', apiRouterCategory);
 
 
 var port = process.env.PORT || 4000;

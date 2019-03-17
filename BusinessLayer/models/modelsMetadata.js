@@ -16,5 +16,5 @@ var metadataSchema = new mongoose.Schema({
   LossValue:String
 });
 
-const modelsMetadata = mongoose.model('modelsMetadata',metadataSchema);
+const modelsMetadata = mongoose.model('modelsmetadatas',metadataSchema);
 module.exports = modelsMetadata;
