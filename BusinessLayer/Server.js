@@ -4,7 +4,7 @@ var apiRouter = require('./routes/viprahub');
 var path = require('path');
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://dbUser:dbUser@cluster-x6phc.mongodb.net/CustomerApp?retryWrites=true', { useNewUrlParser: true })
+mongoose.connect('mongodb+srv://naveena:naveena@cluster0-6rknx.mongodb.net/viprahub?retryWrites=true', { useNewUrlParser: true })
   .then(() => console.log('connection successful'))
   .catch((err) => console.error(err));
 
