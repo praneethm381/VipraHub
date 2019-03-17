@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var categorySchema = new mongoose.Schema({
+var metadataSchema = new mongoose.Schema({
   model_name: String,
   Author: String,
   categoryID: String,
@@ -16,5 +16,5 @@ var categorySchema = new mongoose.Schema({
   LossValue:String
 });
 
-const models = mongoose.model('models',categorySchema);
-module.exports = models;
+const modelsMetadata = mongoose.model('modelsMetadata',metadataSchema);
+module.exports = modelsMetadata;
