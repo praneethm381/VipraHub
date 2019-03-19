@@ -18,6 +18,11 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule} from '@angular/fire/auth';
 import { environment } from '../environments/environment';
+import {UploadDownloadComponent} from './upload/upload.component';
+import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
+import {MatDialogModule} from '@angular/material';
+import { DialogService } from './dialog/dialog.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,10 @@ import { environment } from '../environments/environment';
     SearchComponent,
     UserdashboardComponent,
     HomeHeaderComponent,
-    HomeFooterComponent
+    HomeFooterComponent,
+    UploadDownloadComponent,
+    FileSelectDirective,
+    FileDropDirective,
   ],
   imports: [
     BrowserModule,
@@ -41,8 +49,10 @@ import { environment } from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [ DialogService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
