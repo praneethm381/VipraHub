@@ -17,6 +17,8 @@ const apiUrlCategory = '/category';
 export class ViprahubService {
   public editdata = { };
   public id;
+  public searchText;
+  public searchResults;
   constructor(private http: HttpClient) { }
 
   private handleError(error: HttpErrorResponse) {
@@ -35,9 +37,12 @@ export class ViprahubService {
     const body = res;
     return body || {};
   }
-
+  searchMetadataByText(text: string): Observable<any> {
+    return this.http.get(`${apiUrl}/getAll?q=` + text, httpOptions).pipe(
+      catchError(this.handleError));
+  }
   searchMetadataByCategory(categoryID: string): Observable<any> {
-    return this.http.get(`${apiUrl}/${categoryID}`, httpOptions).pipe(
+      return this.http.get(`${apiUrl}/${categoryID}`, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
@@ -48,10 +53,8 @@ export class ViprahubService {
       );
   }
   getMetadata(): Observable<any> {
-    return this.http.get(apiUrl, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
+    return this.http.get(`${apiUrl}/getAll`, httpOptions).pipe(
+        catchError(this.handleError));
   }
   createCategory(data): Observable<any> {
     return this.http.post(apiUrlCategory, data, httpOptions)
@@ -59,7 +62,6 @@ export class ViprahubService {
         catchError(this.handleError)
       );
   }
-
   getCategory(): Observable<any> {
     return this.http.get(apiUrlCategory, httpOptions).pipe(
       map(this.extractData),

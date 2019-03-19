@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // import {LoginComponent} from '../login/login.component';
+import {ViprahubService} from '../viprahub.service';
 import {Router} from '@angular/router';
 @Component({
   selector: 'app-home-header',
@@ -9,16 +10,25 @@ import {Router} from '@angular/router';
 export class HomeHeaderComponent implements OnInit {
   public loginout = 'Log In';
   public hideSignup = false;
-  constructor(public router: Router) { }
-  userprofile() {
-    // this.loginComponent.userlogin();
-  }
+  search = { text: ''};
+
+  constructor(public router: Router, public vipraService: ViprahubService) { }
   logInOut() {
     if (this.loginout === 'Log Out') {
       this.router.navigate(['/home']);
     } else {
       this.router.navigate(['/login']);
     }
+  }
+  getResults() {
+      this.vipraService.searchMetadataByText(this.search.text).subscribe(res => {
+        console.log(res);
+        this.vipraService.searchResults = res;
+        this.router.navigate(['/search']);
+      }, err => {
+        console.log(err);
+      });
+
   }
   ngOnInit() {
     if (this.router.url === '/user') {

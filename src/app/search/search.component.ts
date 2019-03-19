@@ -10,27 +10,10 @@ import {ViprahubService} from '../viprahub.service';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-
-  constructor(private http: HttpClient, private vipraService: ViprahubService) { }
   listOfModels;
-
-  getResults() {
-    // this.createCategory();
-    // this.vipraService.searchMetadata()
-    //   .subscribe(res => {
-    //     console.log(res);
-    //     this.listOfModels = res;
-    //   }, err => {
-    //     console.log(err);
-    //   });
-    // this.http.get('../../assets/modelData.json').
-    // subscribe(modelData => {
-    //   this.listOfModels = modelData['models'];
-    //   console.log(modelData['models']);
-    // }, error => {});
+  constructor(private http: HttpClient, private vipraService: ViprahubService) {
+    this.listOfModels = this.vipraService.searchResults;
   }
   ngOnInit() {
-    this.getResults();
   }
-
 }

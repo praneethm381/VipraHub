@@ -5,11 +5,20 @@ var modelsMetadata = require('../models/modelsMetadata.js');
 
 // Model metadata CRUD
 
-router.get('/', function (req, res, next) {
-  modelsMetadata.find(function (err, data) {
-    if (err) return next(err);
-    res.json(data);
-  });
+router.get('/getAll', function (req, res, next) {
+  var q = req.query.q;
+  if (q == undefined || q == "" || q == null)
+  {
+    modelsMetadata.find({}, function (err, data) {
+      if (err) return next(err);
+      res.json(data);
+    });
+  } else {
+    modelsMetadata.find({ $or: [{"model_name": q}, {"Author": q}, {"categoryID": q}, {"framework": q}]}, function (err, data) {
+      if (err) return next(err);
+      res.json(data);
+    });
+  }
 });
 
 router.post('/', function (req, res, next) {
@@ -23,8 +32,15 @@ router.post('/', function (req, res, next) {
   modelsMetadata.find({"categoryID": req.params.categoryID}, function (err,post){
     if (err) return next(err);
     res.json(post);
-  })
-})
+  });
+});
+
+// router.get('/get', function(req, res, next){
+//   modelsMetadata.find({}, function (err,data){
+//     if (err) return next(err);
+//     res.json(data);
+//   });
+// });
 
 
 module.exports = router;
