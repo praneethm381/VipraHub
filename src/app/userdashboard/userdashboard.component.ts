@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import {Router} from '@angular/router';
+import {UploadDownloadComponent} from '../upload/upload.component';
+import { DialogService } from '../dialog/dialog.service';
 
 @Component({
   selector: 'app-userdashboard',
@@ -60,8 +62,17 @@ export class UserdashboardComponent implements OnInit {
     clone[0].data = data;
     this.barChartData = clone;
   }
-  constructor() { }
 
-  ngOnInit(): void {
+  constructor(private dialogService: DialogService) {}
+
+  /**
+   * Show the login screen in a dialog.
+   */
+  openUploadDownloadComponent() {
+    this.dialogService.open(UploadDownloadComponent, {
+    });
+  }
+
+  ngOnInit() {
   }
 }

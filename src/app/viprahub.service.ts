@@ -42,7 +42,7 @@ export class ViprahubService {
       catchError(this.handleError));
   }
   searchMetadataByCategory(categoryID: string): Observable<any> {
-      return this.http.get(`${apiUrl}/${categoryID}`, httpOptions).pipe(
+    return this.http.get(`${apiUrl}/${categoryID}`, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
@@ -54,7 +54,7 @@ export class ViprahubService {
   }
   getMetadata(): Observable<any> {
     return this.http.get(`${apiUrl}/getAll`, httpOptions).pipe(
-        catchError(this.handleError));
+      catchError(this.handleError));
   }
   createCategory(data): Observable<any> {
     return this.http.post(apiUrlCategory, data, httpOptions)
