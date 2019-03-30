@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   }
 
   getModels(categories) {
-  const id = categories._id;
+  const id = categories.name;
   this.vipraHubService.searchMetadataByCategory(id).subscribe(res => {
     console.log(res);
     this.listOfModels = res;

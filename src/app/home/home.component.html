@@ -50,7 +50,7 @@
 </header>
 <div class="contentBg">
   <div class="container">
-    <div class="colorDarkBlue"><h3>Browse by Categories</h3></div>
+    <div class="colorDarkBlue"><u><h3>Browse by Categories</h3></u></div>
     <div class="row">
       <div  class="col-3 p-3" *ngFor="let categories of listOfCategories">
         <div class="category features">
@@ -70,13 +70,14 @@
         <div  class="col-sm" *ngFor="let modelData of (listOfModels | orderBy: '-AccuracyValue') | slice:0:3 " >  <!--| orderBy: '-AccuracyValue'-->
           <div class="card features rounded p-4">
             <div class="card-body">
-              <b class="p-1">{{modelData.model_name}}</b>
+              <h5 class="p-1">{{modelData.model_name}}</h5>
               <div class="row p-2">
                 <div class="col-md-auto">
-                  Author : {{modelData.Author}} <br>
-                  Accuracy : {{modelData.AccuracyValue}}<br>
-                  Optimizer : {{modelData.Optimizer}}<br>
-                  Framework : {{modelData.framework}}<br>
+                  <b>Author</b> : {{modelData.Author}} <br>
+                  <b>Category</b> : {{modelData.categoryID}}<br>
+                  <b>Accuracy</b> : {{modelData.AccuracyValue}}<br>
+                  <b>Optimizer</b> : {{modelData.Optimizer}}<br>
+                  <b>Framework</b> : {{modelData.framework}}<br>
                 </div>
               </div>
             </div>
@@ -90,7 +91,7 @@
 </div>
 <div class="contentBg">
   <div class="container">
-    <div class="colorDarkBlue bg-gradient-light"><b><u><h3>Why VipraHub?</h3></u></b></div>
+    <div class="colorDarkBlue bg-gradient-light"><u><h3>Why VipraHub?</h3></u></div>
     <div class="row mt-5">
       <div class="col-3 text-center">
         <i class="fa fa-rocket fa-5x"></i><br/>

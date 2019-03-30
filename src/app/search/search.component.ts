@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import { map, filter } from 'rxjs/operators';
-import { OrderModule } from 'ngx-order-pipe';
 import {ViprahubService} from '../viprahub.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -11,9 +10,10 @@ import {ViprahubService} from '../viprahub.service';
 })
 export class SearchComponent implements OnInit {
   listOfModels;
-  constructor(private http: HttpClient, private vipraService: ViprahubService) {
-    this.listOfModels = this.vipraService.searchResults;
+  search = { text: ''};
+  constructor(private http: HttpClient, private vipraService: ViprahubService, private router: Router) {
   }
   ngOnInit() {
+     this.listOfModels = this.vipraService.searchResults;
   }
 }

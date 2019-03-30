@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 // import {LoginComponent} from '../login/login.component';
+import {SearchComponent} from '../search/search.component';
+import {HttpClient} from '@angular/common/http';
+
 import {ViprahubService} from '../viprahub.service';
 import {Router} from '@angular/router';
 @Component({
@@ -12,7 +15,8 @@ export class HomeHeaderComponent implements OnInit {
   public hideSignup = false;
   search = { text: ''};
 
-  constructor(public router: Router, public vipraService: ViprahubService) { }
+  constructor(public router: Router, private http: HttpClient, public vipraService: ViprahubService) { }
+  searchC = new SearchComponent(this.http, this.vipraService, this.router)
   logInOut() {
     if (this.loginout === 'Log Out') {
       this.router.navigate(['/home']);
@@ -21,14 +25,9 @@ export class HomeHeaderComponent implements OnInit {
     }
   }
   getResults() {
-      this.vipraService.searchMetadataByText(this.search.text).subscribe(res => {
-        console.log(res);
-        this.vipraService.searchResults = res;
-        this.router.navigate(['/search']);
-      }, err => {
-        console.log(err);
-      });
-
+    this.vipraService.searchText = this.search.text;
+    this.vipraService.getSearchResults(this.search.text);
+    this.router.navigate(['/search']);
   }
   ngOnInit() {
     if (this.router.url === '/user') {

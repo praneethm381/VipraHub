@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var modelsMetadata = require('../models/modelsMetadata.js');
-// var categories = require('../models/categories.js');
+var categories = require('../models/categories.js');
 
 // Model metadata CRUD
 

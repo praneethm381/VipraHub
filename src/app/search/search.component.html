@@ -1,5 +1,5 @@
 <app-home-header></app-home-header>
-<div class="container topPadding">
+<div class="container topPadding contentBg">
   <div class="row colorDarkBlue">
     <div class="col-10">
       <h6><u>Search Results</u></h6>
@@ -18,16 +18,17 @@
   </div>
   <hr class="style1">
   <div class="row p-5">
-    <div  class="col-sm m-4" *ngFor="let modelData of (listOfModels | orderBy:'-AccuracyValue' )  " >
+    <div  class="col-sm m-4" *ngFor="let modelData of (vipraService.searchResults | orderBy:'-AccuracyValue' )  " >
       <div class="card features rounded p-4">
         <div class="card-body">
-          <b class="p-1">{{modelData.model_name}}</b>
+          <h5 class="p-1">{{modelData.model_name}}</h5>
           <div class="row p-2">
             <div class="col-md-auto">
-              Author : Neha Navgale <br>
-              Accuracy : {{modelData.AccuracyValue}}<br>
-              Optimizer : {{modelData.Optimizer}}<br>
-              Framework : {{modelData.framework}}<br>
+              <b>Author</b> :  {{modelData.Author}}<br>
+              <b>Category</b> : {{modelData.categoryID}}<br>
+              <b>Accuracy</b> : {{modelData.AccuracyValue}}<br>
+              <b>Optimizer</b> : {{modelData.Optimizer}}<br>
+              <b>Framework</b> : {{modelData.framework}}<br>
             </div>
           </div>
         </div>

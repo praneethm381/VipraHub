@@ -15,8 +15,6 @@ const apiUrlCategory = '/category';
 })
 
 export class ViprahubService {
-  public editdata = { };
-  public id;
   public searchText;
   public searchResults;
   constructor(private http: HttpClient) { }
@@ -66,6 +64,14 @@ export class ViprahubService {
     return this.http.get(apiUrlCategory, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
+  }
+  getSearchResults(text) {
+    this.searchMetadataByText(text).subscribe(res => {
+      console.log(res);
+      this.searchResults = res;
+    }, err => {
+      console.log(err);
+    });
   }
 
 }
