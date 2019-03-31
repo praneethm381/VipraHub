@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import {Router} from '@angular/router';
+import registration from '../models/registration';
+import { RegistrationService} from '../services/registration.service';
 
 
 @Component({
@@ -16,8 +17,8 @@ export class RegistrationComponent implements OnInit {
      'password': '',
      'cpassword': ''
     };
-
-  constructor(public ngAuth: AngularFireAuth, private router: Router) {
+  missingField: Boolean = false;
+  constructor(private registrationService: RegistrationService, private router: Router) {
     // this.resetuser();
   }
   // resetuser() {
@@ -30,18 +31,25 @@ export class RegistrationComponent implements OnInit {
   //   };
   // }
   ngOnInit() {
+
   }
   registerUser() {
 
-    if (this.user.password !== this.user.cpassword) {
-      return console.error('Password don\'t match');
+
+    const userDetails = {} as registration;
+    userDetails.emailID = this.user.email;
+    userDetails.firstName = this.user.firstname;
+    userDetails.lastName = this.user.lastname;
+    userDetails.password = this.user.password
+    userDetails.confirmPassword = this.user.cpassword;
+    if (this.user.email === '' && this.user.firstname === '' && this.user.lastname === '' && this.user.password === '' && this.user.cpassword === ''){
+      this.missingField = true;
     }
-    try {
-      const result = this.ngAuth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password)
-      this.router.navigate(['login']);
-    } catch (err) {
-      console.dir(err);
-    }
+    console.log(userDetails);
+    this.registrationService.addUser(userDetails).subscribe(data => {
+      console.log('After Backend call', +data);
+      this.router.navigate(['/login']);
+    });
   }
 
   }

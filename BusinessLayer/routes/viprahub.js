@@ -1,4 +1,5 @@
 var express = require('express');
+var fs = require('fs');
 var router = express.Router();
 var modelsMetadata = require('../models/modelsMetadata.js');
 var categories = require('../models/categories.js');
@@ -42,5 +43,8 @@ router.post('/', function (req, res, next) {
 //   });
 // });
 
-
 module.exports = router;
+
+// Author: Dharani-Reading meta data from File
+
+

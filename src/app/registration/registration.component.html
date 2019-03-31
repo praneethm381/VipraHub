@@ -31,6 +31,9 @@
     <div class="form-group">
       <button type="button" class="btn btn-success vipra-blue-button width-100" (click)="registerUser()">Register</button>
     </div>
+    <div *ngIf="missingField" class="form-group">
+      <span style="color: red"> *All fields are required</span>
+    </div>
     <div class="">
       <a routerLink="/login" class="vipra-blue-text">Already signed up? Login Here</a>
     </div>
