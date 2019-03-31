@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 
 import {ViprahubService} from '../viprahub.service';
 import {Router} from '@angular/router';
+import {OrderPipe} from 'ngx-order-pipe';
 @Component({
   selector: 'app-home-header',
   templateUrl: './home-header.component.html',
@@ -15,8 +16,8 @@ export class HomeHeaderComponent implements OnInit {
   public hideSignup = false;
   search = { text: ''};
 
-  constructor(public router: Router, private http: HttpClient, public vipraService: ViprahubService) { }
-  searchC = new SearchComponent(this.http, this.vipraService, this.router)
+  constructor(public router: Router, private http: HttpClient, public vipraService: ViprahubService, private orderPipe: OrderPipe) { }
+  searchC = new SearchComponent(this.http, this.vipraService, this.router, this.orderPipe);
   logInOut() {
     if (this.loginout === 'Log Out') {
       this.router.navigate(['/home']);

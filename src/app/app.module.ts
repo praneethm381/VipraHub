@@ -23,6 +23,7 @@ import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
 import {MatDialogModule} from '@angular/material';
 import { DialogService } from './dialog/dialog.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     MatDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule
   ],
   providers: [ DialogService ],
   bootstrap: [AppComponent]

@@ -12,7 +12,7 @@
   display: block;
   overflow: hidden;
   cursor: pointer;
-  border: 0px solid #999999;
+  border: 0 solid #999999;
   border-radius: 50px;
 }
 .flipswitch-inner {
@@ -55,7 +55,7 @@
   width: 20px;
   margin: 2px;
   background: #FFFFFF;
-  border: 0px solid #999999;
+  border: 0 solid #999999;
   border-radius: 50px;
   position: absolute;
   top: 0;
@@ -105,5 +105,5 @@
 
 .backColorDarkBlue
 {
-  background-color: #1c214b;
+  background-color: #1c214b !important;
 }

@@ -5,20 +5,18 @@
       <h6><u>Search Results</u></h6>
     </div>
     <div class="col-2">
-      <div class="dropdown show backColorDarkBlue rounded">
-        <a class="btn dropdown-toggle text-white" role="button" id="dropdownMenuLink" data-toggle="dropdown">
-          Sort By
-        </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="#">Accuracy</a>
-          <a class="dropdown-item" href="#">Year</a>
+      <div ngbDropdown class="rounded text-right" placement="bottom-right">
+        <button class="btn text-white backColorDarkBlue" id="dropdownBasic1" ngbDropdownToggle>Sort By</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem (click)="setOrder('AccuracyValue')">Accuracy</button>
+          <button ngbDropdownItem (click)="setOrder('Year')">Year</button>
         </div>
       </div>
     </div>
   </div>
   <hr class="style1">
   <div class="row p-5">
-    <div  class="col-sm m-4" *ngFor="let modelData of (vipraService.searchResults | orderBy:'-AccuracyValue' )  " >
+    <div  class="col-sm m-4" *ngFor="let modelData of (vipraService.searchResults | orderBy:order )  " >
       <div class="card features rounded p-4">
         <div class="card-body">
           <h5 class="p-1">{{modelData.model_name}}</h5>
@@ -29,6 +27,7 @@
               <b>Accuracy</b> : {{modelData.AccuracyValue}}<br>
               <b>Optimizer</b> : {{modelData.Optimizer}}<br>
               <b>Framework</b> : {{modelData.framework}}<br>
+              <b>Year</b> : {{modelData.Year}}<br>
             </div>
           </div>
         </div>
