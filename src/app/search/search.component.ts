@@ -14,6 +14,11 @@ export class SearchComponent implements OnInit {
   constructor(private http: HttpClient, private vipraService: ViprahubService, private router: Router) {
   }
   ngOnInit() {
-     this.listOfModels = this.vipraService.searchResults;
+    this.vipraService.getMetadata().subscribe(res => {
+      console.log(res);
+      this.vipraService.searchResults = res;
+    }, err => {
+      console.log(err);
+    });
   }
 }

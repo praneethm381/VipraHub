@@ -15,12 +15,14 @@ router.get('/getAll', function (req, res, next) {
       res.json(data);
     });
   } else {
-    modelsMetadata.find({ $or: [{"model_name": q}, {"Author": q}, {"categoryID": q}, {"framework": q}]}, function (err, data) {
+    modelsMetadata.find({ $or: [{"model_name": new RegExp(q, "gi")}, {"Author": new RegExp(q, "gi")}, {"categoryID": new RegExp(q, "gi")}, {"framework": new RegExp(q, "gi")}, {"size": new RegExp(q, "gi")}, {"epochs": new RegExp(q, "gi")}, {"layersCount": new RegExp(q, "gi")}, {"InputTensors": new RegExp(q, "gi")}, {"OutputTensor": new RegExp(q, "gi")}, {"Optimizer": new RegExp(q, "gi")}, {"LossFunction": new RegExp(q, "gi")},{"AccuracyValue": new RegExp(q, "gi")},{"LossValue": new RegExp(q, "gi")}]}, function (err, data) {
       if (err) return next(err);
       res.json(data);
     });
   }
 });
+
+// { "$text": { "$search": q , "$caseSensitive": false} }
 
 router.post('/', function (req, res, next) {
   modelsMetadata.create(req.body, function (err, post) {
