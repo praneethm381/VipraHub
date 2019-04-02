@@ -2,16 +2,19 @@ import { Component, OnInit } from '@angular/core';
 
 import {Router} from '@angular/router';
 import {UploadDownloadComponent} from '../upload/upload.component';
-import { DialogService } from '../dialog/dialog.service';
+import { DialogService } from '../dialog.service';
+import {ViewEncapsulation} from '@angular/core';
+
 
 @Component({
   selector: 'app-userdashboard',
   templateUrl: './userdashboard.component.html',
-  styleUrls: ['./userdashboard.component.css']
+  styleUrls: ['./userdashboard.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class UserdashboardComponent implements OnInit {
 
-   public barChartOptions: any = {
+  public barChartOptions: any = {
     scaleShowVerticalLines: false,
     responsive: true
   };
@@ -22,7 +25,7 @@ export class UserdashboardComponent implements OnInit {
   public barChartData: any[] = [
     {data: [65, 59, 80, 81, 70], label: 'No.of.Views'}
   ];
-   public chartColors: Array<any> = [
+  public chartColors: Array<any> = [
     { // first color
       backgroundColor: '#103063',
       borderColor: 'rgba(225,10,24,0.2)',

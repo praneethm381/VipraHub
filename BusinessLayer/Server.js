@@ -25,6 +25,7 @@ app.use('/search', express.static(path.join(__dirname, '../dist/viprahub')));
 app.use('/registration', express.static(path.join(__dirname, '../dist/viprahub')));
 app.use('/userdashboard', express.static(path.join(__dirname, '../dist/viprahub')));
 app.use('/upload', express.static(path.join(__dirname, '../dist/viprahub')));
+app.use('/showimage', express.static(path.join(__dirname, '../dist/viprahub')));
 
 app.use('/api', apiRouter);
 app.use('/category', apiRouterCategory);

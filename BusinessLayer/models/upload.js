@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const UploadSchema = new Schema({
   name: {
-    type: String,
+    type: String
   },
   categoryId: {
     type: String,
