@@ -42,10 +42,14 @@ export class RegistrationComponent implements OnInit {
     userDetails.lastName = this.user.lastname;
     userDetails.password = this.user.password
     userDetails.confirmPassword = this.user.cpassword;
-    if (this.user.email === '' && this.user.firstname === '' && this.user.lastname === '' && this.user.password === '' && this.user.cpassword === ''){
-      this.missingField = true;
+    if (this.user.email === '' && this.user.firstname === '' &&
+        this.user.lastname === '' && this.user.password === '' &&
+        this.user.cpassword === '') {
+           this.missingField = true;
     }
     console.log(userDetails);
+    /*Asking Registraton service to send the user inputted data to Backend services for storing in DB
+    * If it is success navigating user to login page*/
     this.registrationService.addUser(userDetails).subscribe(data => {
       console.log('After Backend call', +data);
       this.router.navigate(['/login']);

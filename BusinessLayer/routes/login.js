@@ -23,7 +23,12 @@ userRouter.post('/',function (req, res, next) {
         /* jwt.sign({userPayload}, 'secreteKey', (err, token) => {
              res.json({message: "Success"}, {token});
          })*/
-        res.json({message: "Success"});
+        var temp = {
+          emailID: data.emailID,
+          fullName: data.firstName + data.lastName
+        }
+
+        res.json({message: "Success", user: temp});
       } else {
         res.json({message:"Invalid credentials"});
       }

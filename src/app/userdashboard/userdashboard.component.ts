@@ -6,6 +6,7 @@ import { DialogService } from '../dialog.service';
 import {ViewEncapsulation} from '@angular/core';
 
 
+import { LoggedinUserInfoService } from '../services/loggedin-user-info.service';
 @Component({
   selector: 'app-userdashboard',
   templateUrl: './userdashboard.component.html',
@@ -66,7 +67,7 @@ export class UserdashboardComponent implements OnInit {
     this.barChartData = clone;
   }
 
-  constructor(private dialogService: DialogService) {}
+  constructor(private dialogService: DialogService, private loginsuersInfo: LoggedinUserInfoService) {}
 
   /**
    * Show the login screen in a dialog.
@@ -78,4 +79,5 @@ export class UserdashboardComponent implements OnInit {
 
   ngOnInit() {
   }
+
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { LoginService} from '../services/login.service';
+import { LoggedinUserInfoService } from '../services/loggedin-user-info.service';
 import {computeStyle} from '@angular/animations/browser/src/util';
 
 @Component({
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   emailID: String = '';
   password: String = '';
   InvalidUser: Boolean = false;
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private loggedInUserInfo: LoggedinUserInfoService, private router: Router) { }
 
 
 
@@ -23,11 +24,16 @@ export class LoginComponent implements OnInit {
       emailID: this.emailID,
       password: this.password
     };
-    this.loginService.getUsers(user).subscribe( (data) => {
+    /*Checking if users exists in DB by calling LoginServices*/
+    this.loginService.authenticate(user).subscribe( (data) => {
+      /*Receives success message if user exists and with correct credentails*/
       // @ts-ignore
       if (data.message === 'Success') {
+        console.log(data);
+        this.loggedInUserInfo.setUsers(data);
+        // const userInfo = this.loggedInUserInfo.getUsers();
+        // console.log(userInfo);
         this.router.navigate(['./userdashboard']);
-        return true;
         // @ts-ignore
         console.log(data.message);
       } else {

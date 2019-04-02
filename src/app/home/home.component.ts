@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import { OrderModule } from 'ngx-order-pipe';
 import {ViprahubService} from '../viprahub.service';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -56,5 +57,6 @@ export class HomeComponent implements OnInit {
     }, err => {
       console.log(err);
     });
+
   }
 }

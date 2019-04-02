@@ -14,7 +14,7 @@ export class RegistrationService {
 
   constructor(private http: HttpClient) {
   }
-
+/*Sending received details to backend services to add user and returning response to registration ts */
   addUser(userDetails) {
     console.log(userDetails);
     return this.http.post(`${this.uri}`, userDetails);
