@@ -17,10 +17,20 @@ router.post('/models', (req,res) => {
 
 router.get('/models', function (req, res, next) {
   console.log('inside models')
-  uploadFile.find(function (err, data) {
-    if (err) return next(err);
-    res.json(data);
-  });
+  var name = req.query.name;
+  if (name == undefined || name == "" || name == null)
+  {
+    uploadFile.find(function (err, data) {
+      if (err) return next(err);
+      res.json(data);
+    });
+  }else{
+    uploadFile.find({"name": req.query.name, "userId": req.query.userID}, function (err,post){
+      if (err) return next(err);
+      console.log(post)
+      res.json(post);
+    });
+  }
 });
 
 router.get('/models/:name', function(req, res, next){

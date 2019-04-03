@@ -4,6 +4,7 @@ import {  MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FilesService } from '../files.service';
 import { ViprahubService } from '../viprahub.service';
 import { ModelsService } from '../models.service';
+import { LoggedinUserInfoService } from '../services/loggedin-user-info.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -24,15 +25,15 @@ export class UploadDownloadComponent implements OnInit {
   public modelname: any;
   public alreadyModelNamePresent: any;
   public IsFilesUploadedSuccessfully: any = false;
+  public filesArray: Array<any> = [];
 
   constructor(
     private filesService: FilesService,
     private modelsService: ModelsService,
     private viprahubService: ViprahubService,
+    private loggedinUserInfoService: LoggedinUserInfoService,
     public dialogRef: MatDialogRef<UploadDownloadComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
-    // this.categories = ["category_1", "category_2", "category_3"];
-  }
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   ngOnInit() {
     this.uploader = new FileUploader({url: this.url});
@@ -47,35 +48,26 @@ export class UploadDownloadComponent implements OnInit {
   }
 
   checkIfModelNameIsAlreadyPresent() {
-    this.alreadyModelNamePresent = this.allModelsFromDb.filter((model) => model.name === this.modelname).length > 0;
+    this.alreadyModelNamePresent = this.allModelsFromDb.filter((model) => model.userId === this.loggedinUserInfoService.userInfo.emailID && model.name === this.modelname).length > 0;
 
     if ((typeof(this.alreadyModelNamePresent) === 'undefined') || this.alreadyModelNamePresent) {
       alert('Error: Duplicate model name. Please enter another model name.');
     } else {
       this.uploader.uploadAll();
 
-      this.uploader.onSuccessItem = (item, response) => {
-        this.customOnSuccessItem(item, response, this.selectedcategory);
+      this.uploader.onSuccessItem = (item: FileItem, response: string) => {
+        const res = JSON.parse(response); // success server response
+        console.log(this.selectedcategory);
+        this.filesArray.push(res.file_id)
       };
-      // alert("Files have been uploaded successfully for "+this.modelname);
-      // this.dialogRef.close();
+
+      this.uploader.onCompleteAll = () => {
+        this.modelsService.uploadModel({userId: this.loggedinUserInfoService.userInfo.emailID, categoryId: this.selectedcategory, name: this.modelname, fileReferenceIDs: this.filesArray})
+          .subscribe((post) => {
+            console.log('Upload Model created with parameters');
+          });
+      }
       this.IsFilesUploadedSuccessfully = true;
     }
   }
-
-  customOnSuccessItem(item: FileItem, response: string, selectedId: any): any {
-    const res = JSON.parse(response); // success server response
-    console.log(this.selectedcategory);
-    this.modelsService.uploadModel({categoryId: this.selectedcategory, name: this.modelname, fileReferenceID: res.file_id})
-      .subscribe((post) => {
-        console.log('Upload Model created with parameters');
-      });
-  }
-
-  // filterForeCategoryIds(filterVal: any) {
-  //   console.log(filterVal)
-  //   this.selectedId = this.categories.filter((item) => item._id == filterVal);
-  // }
-
-
 }

@@ -45,9 +45,9 @@ export class ModelsService {
       catchError(this.handleError));
   }
 
-  getModelsBasedOnModelName(name: string): Observable<any> {
+  getModelsBasedOnModelName(name: string, userID: string): Observable<any> {
     console.log("inside files service getmodelsonname"+name);
-    return this.http.get(`${apiModels}/models/${name}`, httpOptions).pipe(
+    return this.http.get(`${apiModels}/models?name=`+name+'&userID='+userID, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }

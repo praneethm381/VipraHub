@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
 import {Router} from '@angular/router';
 import {UploadDownloadComponent} from '../upload/upload.component';
 import { DialogService } from '../dialog.service';
+import { ViprahubService } from '../viprahub.service';
 import {ViewEncapsulation} from '@angular/core';
-
-
 import { LoggedinUserInfoService } from '../services/loggedin-user-info.service';
 @Component({
   selector: 'app-userdashboard',
@@ -67,7 +65,8 @@ export class UserdashboardComponent implements OnInit {
     this.barChartData = clone;
   }
 
-  constructor(private dialogService: DialogService, private loginsuersInfo: LoggedinUserInfoService) {}
+  constructor(private dialogService: DialogService, private loginsuersInfo: LoggedinUserInfoService,
+              private viprahubService: ViprahubService) {}
 
   /**
    * Show the login screen in a dialog.
@@ -78,6 +77,12 @@ export class UserdashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.viprahubService.searchUserModels(this.loginsuersInfo.userInfo.emailID).subscribe(res => {
+      console.log(res);
+      this.viprahubService.searchResults = res;
+    }, err => {
+      console.log(err);
+    });
   }
 
 }

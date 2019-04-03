@@ -2,6 +2,7 @@ var express = require('express');
 var fs = require('fs');
 var router = express.Router();
 var modelsMetadata = require('../models/modelsMetadata.js');
+var usermodels = require('../models/upload.js');
 var categories = require('../models/categories.js');
 
 // Model metadata CRUD
@@ -44,7 +45,13 @@ router.post('/', function (req, res, next) {
 //     res.json(data);
 //   });
 // });
-
+router.get('/getModels', function (req, res, next) {
+  var userid = req.query.userid;
+  usermodels.find({"userId":userid}, function (err, data) {
+      if (err) return next(err);
+      res.json(data);
+    });
+});
 module.exports = router;
 
 // Author: Dharani-Reading meta data from File

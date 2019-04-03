@@ -13,20 +13,21 @@
             {{category.name}}
           </option>
         </select>
-        <div>
-          <label>Model name: </label>
-          <input type="text" [(ngModel)]="modelname" placeholder="category model name">
-        </div>
+      </div>
+      <div class="col-md-4">
+        <label>Model name: </label>
+        <input type="text" [(ngModel)]="modelname" placeholder="category model name">
       </div>
       <div class="col-md-4">
         <form>
-          <h4>Select files</h4>
+          <!-- <h4>Select files</h4> -->
           <input type="file" ng2FileSelect [uploader]="uploader" multiple [disabled]="IsFilesUploadedSuccessfully"/>
         </form>
       </div>
     </div>
+
     <br>
-    <div class="col-md-8">
+    <div class="col-md-12">
       <h3>Upload queue</h3>
       <p>File(s) Selected: {{ uploader?.queue?.length }}</p>
       <table class="table">

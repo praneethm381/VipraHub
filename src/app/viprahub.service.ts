@@ -9,6 +9,7 @@ const httpOptions = {
 };
 const apiUrl = '/api';
 const apiUrlCategory = '/category';
+const apiUrlUserModelsData = '/usermodels';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,10 @@ export class ViprahubService {
   }
   searchMetadataByText(text: string): Observable<any> {
     return this.http.get(`${apiUrl}/getAll?q=` + text, httpOptions).pipe(
+      catchError(this.handleError));
+  }
+  searchUserModels(userid: string): Observable<any> {
+    return this.http.get(`${apiUrl}/getModels?userid=` + userid, httpOptions).pipe(
       catchError(this.handleError));
   }
   searchMetadataByCategory(categoryID: string): Observable<any> {
@@ -73,5 +78,11 @@ export class ViprahubService {
       console.log(err);
     });
   }
-
+  // getUserModelsData(userid) {
+  //   this.searchUserModels(userid).subscribe(res => {
+  //     console.log(res);
+  //   }, err => {
+  //     console.log(err);
+  //   });
+  // }
 }
