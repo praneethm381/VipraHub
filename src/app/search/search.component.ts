@@ -20,6 +20,12 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     this.listOfModels = this.orderPipe.transform(this.vipraService.searchResults, this.order);
     console.log(this.listOfModels);
+    this.vipraService.getMetadata().subscribe(res => {
+      console.log(res);
+      this.vipraService.searchResults = res;
+    }, err => {
+      console.log(err);
+    });
   }
 
   setOrder(value: string) {

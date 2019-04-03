@@ -20,10 +20,13 @@ import { AngularFireAuthModule} from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import {UploadDownloadComponent} from './upload/upload.component';
 import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
-import {MatDialogModule} from '@angular/material';
-import { DialogService } from './dialog/dialog.service';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { DialogService } from './dialog.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FilesService } from './files.service';
+import {  ModelsService } from './models.service';
+import { ShowImageComponent } from './showimage/showimage.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     UploadDownloadComponent,
     FileSelectDirective,
     FileDropDirective,
+    ShowImageComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,13 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     NgbModule
   ],
-  providers: [ DialogService ],
+  providers: [
+    DialogService,
+    {provide: MatDialogRef, useValue: {}},
+    {provide: MAT_DIALOG_DATA,useValue:{}},
+    FilesService,
+    ModelsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,13 +9,13 @@
       <h4> Sign in to VipraHub</h4>
     </div>
     <div class="form-group">
-      <input type="text" class="form-control form-control-lg control-label" name="email" placeholder="User Name" [(ngModel)]="user.email"/>
+      <input type="text" class="form-control form-control-lg control-label" name="email" placeholder="User Name" [(ngModel)]="emailID"/>
     </div>
     <div class="form-group">
-      <input type="password" class="form-control form-control-lg control-label" name="password" placeholder="Password" [(ngModel)]="user.password"/>
+      <input type="password" class="form-control form-control-lg control-label" name="password" placeholder="Password" [(ngModel)]="password"/>
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-primary vipra-blue-button width-100" (click)="userlogin()">Login</button>
+      <button type="submit" class="btn btn-primary vipra-blue-button width-100" (click)="userLogin()">Login</button>
     </div>
     <div *ngIf="InvalidUser" class="form-group">
       <span style="color: red"> *Please check your credentials</span>

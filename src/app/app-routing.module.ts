@@ -7,6 +7,7 @@ import {RegistrationComponent} from './registration/registration.component';
 import {UserdashboardComponent} from './userdashboard/userdashboard.component';
 import {SearchComponent} from './search/search.component';
 import {UploadDownloadComponent} from './upload/upload.component';
+import {ShowImageComponent} from './showimage/showimage.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path: 'search', component: SearchComponent},
   // {path: 'registration', component: RegistrationComponent},
   {path: 'userdashboard', component: UserdashboardComponent},
-  {path: 'upload', component: UploadDownloadComponent}];
+  {path: 'upload', component: UploadDownloadComponent},
+  {path: 'showimage', component: ShowImageComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

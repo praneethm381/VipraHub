@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import {LoginComponent} from '../login/login.component';
+import {LoginComponent} from '../login/login.component';
 import {SearchComponent} from '../search/search.component';
 import {HttpClient} from '@angular/common/http';
 
@@ -31,7 +31,7 @@ export class HomeHeaderComponent implements OnInit {
     this.router.navigate(['/search']);
   }
   ngOnInit() {
-    if (this.router.url === '/user') {
+    if (this.router.url === '/userdashboard') {
       this.loginout = 'Log Out';
       this.hideSignup = true;
     } else {
