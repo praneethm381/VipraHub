@@ -16,6 +16,7 @@ router.post('/models', (req,res) => {
 });
 
 router.get('/models', function (req, res, next) {
+  console.log(req.body.files);
   console.log('inside models')
   var name = req.query.name;
   if (name == undefined || name == "" || name == null)
@@ -42,6 +43,7 @@ router.get('/models/:name', function(req, res, next){
 });
 
 router.post('/files', (req, res) => {
+  console.log(req.body.files);
   upload(req,res, (err) => {
     if(err){
       console.log("Error in uploading file : "+err);

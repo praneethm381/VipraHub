@@ -66,7 +66,7 @@ export class UserdashboardComponent implements OnInit {
   }
 
   constructor(private dialogService: DialogService, private loginsuersInfo: LoggedinUserInfoService,
-              private viprahubService: ViprahubService) {}
+              private viprahubService: ViprahubService , private router: Router) {}
 
   /**
    * Show the login screen in a dialog.
@@ -75,7 +75,9 @@ export class UserdashboardComponent implements OnInit {
     this.dialogService.open(UploadDownloadComponent, {
     });
   }
-
+  viewModels() {
+    this.router.navigate(['./viewmodeldashboard']);
+  }
   ngOnInit() {
     this.viprahubService.searchUserModels(this.loginsuersInfo.userInfo.emailID).subscribe(res => {
       console.log(res);
