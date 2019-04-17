@@ -11,7 +11,8 @@ const cors=require('cors');
 const bodyParser =require('body-parser');
 const registrationRoute = require('./routes/registration');
 const loginRoute = require('./routes/login');
-const viewModelRoute = require('./routes/viewModel')
+// const viewModelRoute = require('./routes/viewModel')
+
 
 const app = express();
 
@@ -35,7 +36,7 @@ app.use('/upload', apiRouterUpload);
 
 app.use('/registration', registrationRoute);
 app.use('/login', loginRoute);
-app.use('/viewModelDashboard', viewModelRoute);
+// app.use('/viewModelDashboard', viewModelRoute);
 
 var port = process.env.PORT || 4000;
 app.set('port', port);
