@@ -3,11 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import {Router} from '@angular/router';
 import { OrderModule } from 'ngx-order-pipe';
 import {ViprahubService} from '../viprahub.service';
+import { CarouselConfig } from 'ngx-bootstrap/carousel';
 
 
 @Component({
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [
+    { provide: CarouselConfig, useValue: { interval: 1500, noPause: true } }
+  ]
 })
 export class HomeComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router, private vipraHubService: ViprahubService) {

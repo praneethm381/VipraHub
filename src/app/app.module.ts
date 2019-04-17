@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import {FormsModule} from '@angular/forms';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
@@ -108,6 +109,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     NgbModule,
     MatSidenavModule,
     MatTabsModule,
+    CarouselModule.forRoot()
   ],
   providers: [
     DialogService,
