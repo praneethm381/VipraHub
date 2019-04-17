@@ -29,6 +29,13 @@ const routes: Routes = [
           title: 'Typography'
         }
       }
+      // {
+      //   path: 'search',
+      //   component: SearchComponent,
+      //   data: {
+      //     title: 'Search'
+      //   }
+      // }
     ]
   }
 ];

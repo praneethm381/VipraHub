@@ -18,7 +18,8 @@ const apiUrlUserModelsData = '/usermodels';
 export class ViprahubService {
   public searchText;
   public searchResults;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

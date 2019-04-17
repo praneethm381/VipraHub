@@ -5,15 +5,14 @@
       <div class="form-group col-4">
         <label>Category</label>
         <select class="form-control">
+
           <option>Select Category...</option>
-          <option>Image Recognization</option>
-          <option>AI</option>
-          <option>Sentimental Analysis</option>
+          <option *ngFor="let category of listOfCategories" value="{{category.name}}">{{category.name}}</option>
         </select>
       </div>
       <div class="form-group col-4">
-         <label>Model Name</label>
-         <input type="text" class="form-control" placeholder="Model Name.."/>
+         <label>Search</label>
+         <input type="text" class="form-control" placeholder="Search.."/>
       </div>
       <div class="form-group col-4">
         <label>Rating</label>
@@ -27,37 +26,69 @@
         </select>
       </div>
    </div>
+    <div class="form-row">
+      <div class="col-12 text-right">
+        <i class="fa fa-th fa-lg mt-1 mr-3" (click)="showTiles()"></i>
+        <i class="fa fa-th-list fa-lg mt-1" (click)="showGrids()"></i>
+      </div>
+      <!--<div class="col-4">-->
+        <!--<div ngbDropdown class="rounded text-right" placement="bottom-right">-->
+          <!--<button class="btn text-white backColorDarkBlue" id="dropdownBasic1" ngbDropdownToggle>Sort By</button>-->
+          <!--<div ngbDropdownMenu aria-labelledby="dropdownBasic1">-->
+            <!--<button ngbDropdownItem >Accuracy</button>-->
+            <!--<button ngbDropdownItem >Year</button>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    </div>
   </form>
 
 <!--Search Result-->
 
-<table class="table table-bordered  table-hover" style="background: white">
+<div [hidden]="table" class="row">
+  <div  class="col-sm m-4" *ngFor="let modelData of vipraService.searchResults  " >
+    <div class="card features rounded p-4">
+      <div class="card-body">
+        <h5 class="p-1">{{modelData.model_name}}</h5>
+        <div class="row p-2">
+          <div class="col-md-auto">
+            <b>Author</b> :  {{modelData.Author}}<br>
+            <b>Category</b> : {{modelData.categoryID}}<br>
+            <b>Accuracy</b> : {{modelData.AccuracyValue}}<br>
+            <b>Optimizer</b> : {{modelData.Optimizer}}<br>
+            <b>Framework</b> : {{modelData.framework}}<br>
+            <b>Year</b> : {{modelData.Year}}<br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<table [hidden]="!table" class="table table-bordered  table-hover mt-2" style="background: white">
   <thead style="background: #1c214b; color: white">
   <tr>
     <th scope="col">Category</th>
     <th scope="col">Model Name</th>
-    <th scope="col">Brief Desc</th>
-    <th scope="col">Rating</th>
+    <th scope="col">Author</th>
+    <th scope="col">Accuracy</th>
+    <th scope="col">Optimizer</th>
+    <th scope="col">Framework</th>
+    <th scope="col">Year</th>
+    <!--<th scope="col">Brief Desc</th>-->
+    <!--<th scope="col">Rating</th>-->
   </tr>
   </thead>
   <tbody>
-  <tr data-toggle="tooltip" data-placement="right" title="Click to view model"  style="pointer-events: fill;">
-    <th scope="row">AI</th>
-    <td>ModelName</td>
-    <td>DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription</td>
-    <td>5</td>
-  </tr>
-  <tr>
-    <th scope="row">AI</th>
-    <td>ModelName</td>
-    <td>DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription</td>
-    <td>5</td>
-  </tr>
-  <tr>
-    <th scope="row">AI</th>
-    <td>ModelName</td>
-    <td>DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription</td>
-    <td>5</td>
+  <tr data-toggle="tooltip" data-placement="right" title="Click to view model"  style="pointer-events: fill;" *ngFor="let modelData of vipraService.searchResults  ">
+    <th scope="row">{{modelData.categoryID}}</th>
+    <td>{{modelData.model_name}}</td>
+    <td>{{modelData.Author}}</td>
+    <td>{{modelData.AccuracyValue}}</td>
+    <td>{{modelData.Optimizer}}</td>
+    <td>{{modelData.framework}}</td>
+    <td>{{modelData.Year}}</td>
   </tr>
   </tbody>
 </table>
