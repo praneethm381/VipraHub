@@ -38,7 +38,7 @@ export const navItems: NavData[] = [
   {
     title: true,
     name: 'Models',
-    icon: 'fas fa-book-reader'  ,
+    icon: 'fa fa-book-reader'  ,
   },
   {
     name: 'Upload Model',
