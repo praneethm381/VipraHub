@@ -74,14 +74,20 @@ export class TypographyComponent {
       if (index !== -1) {
         this.categoryList.splice(index, 1);
       }
-      this.categoryList.forEach(item => {
-        this.result = this.backup.filter(element => {
-          return element.categoryID === item;
+      if (this.categoryList.length > 0) {
+        this.categoryList.forEach(item => {
+          this.result = this.backup.filter(element => {
+            return element.categoryID === item;
+          });
+          this.result.forEach(element => {
+            finalResult.push(element);
+          });
         });
-        this.result.forEach(element => {
+      } else {
+        this.backup.forEach(element => {
           finalResult.push(element);
         });
-      });
+      }
     }
     console.log(this.categoryList);
     console.log(this.result);
