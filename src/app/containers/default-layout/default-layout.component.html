@@ -5,8 +5,18 @@
   [navbarBrandMinimized]="{ src:'assets/image/VipralogoShort.PNG',width: 30, height: 30, alt: 'VH'}"
   [sidebarToggler]="'lg'"
   [asideMenuToggler]="'lg'">
-  <ul class="nav navbar-nav d-md-down-none">
-  </ul>
+  <div class="ml-22 col-4">
+    <form>
+      <div class="form-row">
+        <div class="col-10">
+          <input type="search" class="form-control form-control-sm border-dark" (keyup)="getResults()" placeholder="Search Models" name="searchText" [(ngModel)]="search.text">
+        </div>
+        <!--<div class="col-2 backColorDarkBlue">-->
+          <!--<button type="submit" class="btn btn-sm btn-lg text-white" (click)="getResults()">Search</button>-->
+        <!--</div>-->
+      </div>
+    </form>
+  </div>
   <ul class="nav navbar-nav ml-auto">
 
     <li class="nav-item dropdown" dropdown placement="bottom right">
