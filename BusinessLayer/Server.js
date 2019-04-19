@@ -18,7 +18,8 @@ const viewModelRoute = require('./routes/viewModel')
 
 app.use(express.json());
 app.use(bodyParser.json())
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:4200'}));
+
 
 app.use(express.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, '../dist/viprahub')));
