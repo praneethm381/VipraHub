@@ -2,11 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
+import {UploadDownloadComponent} from "../../upload/upload.component";
+import { DialogService } from '../../dialog.service';
+
 
 @Component({
   templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
+
+  constructor(private dialogService: DialogService){
+
+  }
 
   radioModel: string = 'Month';
 
@@ -378,6 +385,10 @@ export class DashboardComponent implements OnInit {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
+  public openUploadDownloadComponent() {
+    this.dialogService.open(UploadDownloadComponent, {
+    });
+  }
   ngOnInit(): void {
     // generate random values for mainChart
     for (let i = 0; i <= this.mainChartElements; i++) {

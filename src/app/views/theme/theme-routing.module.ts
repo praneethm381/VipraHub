@@ -15,13 +15,13 @@ const routes: Routes = [
         path: '',
         redirectTo: 'colors'
       },
-      {
-        path: 'colors',
-        component: ColorsComponent,
-        data: {
-          title: 'Upload'
-        }
-      },
+      // {
+      //   path: 'colors',
+      //   component: ColorsComponent,
+      //   data: {
+      //     title: 'Upload'
+      //   }
+      // },
       {
         path: 'typography',
         component: TypographyComponent,

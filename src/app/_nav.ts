@@ -40,11 +40,11 @@ export const navItems: NavData[] = [
     name: 'Models',
     icon: 'fa fa-book-reader'  ,
   },
-  {
-    name: 'Upload Model',
-    url: '/theme/colors',
-    icon: 'fa fa-upload'
-  },
+  // {
+  //   name: 'Upload Model',
+  //   url: '/theme/colors',
+  //   icon: 'fa fa-upload'
+  // },
   {
     name: 'Search Models',
     url: '/theme/typography',
