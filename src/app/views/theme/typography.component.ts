@@ -18,12 +18,14 @@ export class TypographyComponent {
   backup;
   displayCategory = true;
   displayRating = true;
+  categoryList = [];
+  result = [];
 
   constructor(private http: HttpClient, private vipraService: ViprahubService, private router: Router, private orderPipe: OrderPipe) {
     // this.listOfModels = this.orderPipe.transform(this.vipraService.searchResults, this.order);
     console.log(this.listOfModels);
     this.vipraService.getMetadata().subscribe(res => {
-      console.log(res);
+      this.backup = res;
       this.vipraService.searchResults = res;
     }, err => {
       console.log(err);
@@ -39,6 +41,7 @@ export class TypographyComponent {
   getResults() {
     this.vipraService.searchText = this.search.text;
     this.vipraService.getSearchResults(this.search.text);
+    this.backup = this.vipraService.searchResults;
     // this.router.navigate(['/search']);
   }
   showTiles() {
@@ -47,24 +50,43 @@ export class TypographyComponent {
   showGrids() {
     this.table = true;
   }
-
-  viewModel(id){
-    localStorage.setItem('modelID',id);
+  viewModel(id) {
+    localStorage.setItem('modelID', id);
     this.router.navigate(['./theme/colors'])
   }
-  // setOrder(value: string) {
-  //   this.order = value;
-  // }
   setOrder(value: string) {
     this.order = value;
   }
-  categoryDropdownChange(category) {
-    console.log(category);
-    this.backup = this.vipraService.searchResults;
-    const result = this.backup.filter(element => {
-      return element.categoryID === category;
+  categoryChecked(e) {
+    const finalResult = [];
+    if (e.target.checked) {
+    this.categoryList.push(e.target.id);
+    this.categoryList.forEach(item => {
+      this.result = this.backup.filter(element => {
+        return element.categoryID === item;
+      });
+      this.result.forEach(element => {
+        finalResult.push(element);
+      });
     });
-    this.vipraService.searchResults = result;
+    } else {
+      const index: number = this.categoryList.indexOf(e.target.id);
+      if (index !== -1) {
+        this.categoryList.splice(index, 1);
+      }
+      this.categoryList.forEach(item => {
+        this.result = this.backup.filter(element => {
+          return element.categoryID === item;
+        });
+        this.result.forEach(element => {
+          finalResult.push(element);
+        });
+      });
+    }
+    console.log(this.categoryList);
+    console.log(this.result);
+    console.log(finalResult);
+    this.vipraService.searchResults = finalResult;
   }
   expandCategory() {
     this.displayCategory = true;
