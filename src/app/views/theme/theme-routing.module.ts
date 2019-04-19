@@ -8,25 +8,25 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'Theme'
+      title: ''
     },
     children: [
       {
         path: '',
         redirectTo: 'colors'
       },
-      {
-        path: 'colors',
-        component: ColorsComponent,
-        data: {
-          title: 'Colors'
-        }
-      },
+      // {
+      //   path: 'colors',
+      //   component: ColorsComponent,
+      //   data: {
+      //     title: 'Upload'
+      //   }
+      // },
       {
         path: 'typography',
         component: TypographyComponent,
         data: {
-          title: 'Typography'
+          title: 'Search Model'
         }
       }
       // {

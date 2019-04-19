@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
-
+import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
+import {combineAll} from "rxjs/operators";
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
 @Injectable({
   providedIn: 'root'
 })
 export class ViewmodeldashboardService {
-
-  modelObj =
+  /*modelObj =
     {
       ModelId:1,
       Overview : {
@@ -23,12 +26,16 @@ export class ViewmodeldashboardService {
 
       },
       Architecture : {}
-    }
+    }*/
 
-  constructor() { }
-
+  constructor(private http: HttpClient) { }
+  modelObj;
+   uri = 'http://localhost:4000/viewModel';
   getModel() {
-    return this.modelObj;
+   console.log('Hi Service');
+   console.log(this.uri);
+   return this.http.get(`${this.uri}`, httpOptions);
+
   }
 }
 

@@ -38,13 +38,13 @@ export const navItems: NavData[] = [
   {
     title: true,
     name: 'Models',
-    icon: 'fas fa-book-reader'  ,
+    icon: 'fa fa-book-reader'  ,
   },
-  {
-    name: 'Upload Model',
-    url: '/theme/colors',
-    icon: 'fa fa-upload'
-  },
+  // {
+  //   name: 'Upload Model',
+  //   url: '/theme/colors',
+  //   icon: 'fa fa-upload'
+  // },
   {
     name: 'Search Models',
     url: '/theme/typography',

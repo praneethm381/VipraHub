@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 export class UploadDownloadComponent implements OnInit {
 
   private files = [];
-  private url = '/uploadToMongo/files';
+  private url = 'http://localhost:4000/uploadToMongo/files';
   // private url = 'http://localhost:4000/upload';
   private uploader: FileUploader;
   public categories: any[];

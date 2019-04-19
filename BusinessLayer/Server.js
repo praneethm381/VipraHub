@@ -11,8 +11,7 @@ const cors=require('cors');
 const bodyParser =require('body-parser');
 const registrationRoute = require('./routes/registration');
 const loginRoute = require('./routes/login');
-// const viewModelRoute = require('./routes/viewModel')
-
+const viewModelRoute = require('./routes/viewModel')
 
 const app = express();
 
@@ -28,6 +27,7 @@ app.use('/registration', express.static(path.join(__dirname, '../dist/viprahub')
 app.use('/userdashboard', express.static(path.join(__dirname, '../dist/viprahub')));
 app.use('/upload', express.static(path.join(__dirname, '../dist/viprahub')));
 app.use('/showimage', express.static(path.join(__dirname, '../dist/viprahub')));
+app.use('/viewModelDashboard', express.static(path.join(__dirname, '../dist/viprahub')));
 
 app.use('/api', apiRouter);
 app.use('/category', apiRouterCategory);
@@ -36,10 +36,15 @@ app.use('/upload', apiRouterUpload);
 
 app.use('/registration', registrationRoute);
 app.use('/login', loginRoute);
-// app.use('/viewModelDashboard', viewModelRoute);
+app.use('/viewModel', viewModelRoute);
 
 var port = process.env.PORT || 4000;
 app.set('port', port);
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 var server = http.createServer(app);
 
 

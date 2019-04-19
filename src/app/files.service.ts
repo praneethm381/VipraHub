@@ -11,8 +11,8 @@ const httpImageOptions = {
   headers: new HttpHeaders({'Content-Type': 'image/jpeg'})
 };
 
-const apiFiles = '/uploadToMongo/files';
-const apiChunks = '/uploadToMongo/chunks';
+const apiFiles = 'http://localhost:4000/uploadToMongo/files';
+const apiChunks = 'http://localhost:4000/uploadToMongo/chunks';
 
 @Injectable()
 export class FilesService {

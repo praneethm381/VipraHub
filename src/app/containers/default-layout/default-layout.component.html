@@ -11,11 +11,11 @@
 
     <li class="nav-item dropdown" dropdown placement="bottom right">
       <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
-        <span></span>
+        <i class="fa fa-user fa-2x"></i>
       </a>
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
 
-        <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
+        <a class="dropdown-item"><i class="fa fa-user"></i> Profile</a>
         <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Logout</a>
       </div>
     </li>
@@ -28,11 +28,12 @@
   </app-sidebar>
   <!-- Main content -->
   <main class="main">
+    <br/>
     <!-- Breadcrumb -->
     <!-- breaking change 'cui-breadcrumb' -->
-    <cui-breadcrumb>
-      <!-- Breadcrumb Menu-->
-    </cui-breadcrumb>
+  <!--  <cui-breadcrumb>
+      &lt;!&ndash; Breadcrumb Menu&ndash;&gt;
+    </cui-breadcrumb>-->
     <div class="container-fluid">
       <router-outlet></router-outlet>
     </div><!-- /.container-fluid -->

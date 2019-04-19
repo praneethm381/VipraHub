@@ -3,8 +3,9 @@ var router = express.Router();
 var categories = require('../models/categories.js');
 
 router.get('/', function (req, res, next) {
+  console.log("hai");
   categories.find(function (err, data) {
-    if (err) return next(err);
+    if (err) console.log(err);
     res.json(data);
   });
 });

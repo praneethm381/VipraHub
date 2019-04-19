@@ -45,6 +45,7 @@ import {  ModelsService } from './models.service';
 import { ShowImageComponent } from './showimage/showimage.component';
 import { ViewmodeldashboardComponent } from './viewmodeldashboard/viewmodeldashboard.component';
 import {MatTabsModule, MatSidenavModule} from '@angular/material';
+import {MatButtonModule} from '@angular/material';
 import {NgbTabset} from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -109,6 +110,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     NgbModule,
     MatSidenavModule,
     MatTabsModule,
+    MatButtonModule,
     CarouselModule.forRoot()
   ],
   providers: [

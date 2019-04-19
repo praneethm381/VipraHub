@@ -58,3 +58,6 @@
   border: 1px;
   border-radius: 3px;
 }
+.example-button-row button{
+  margin-right: 8px;
+}
