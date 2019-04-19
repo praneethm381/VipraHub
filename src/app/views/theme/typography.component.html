@@ -97,7 +97,7 @@
   </div>
       <div class="col-10">
         <div [hidden]="table" class="row">
-          <div  class="col-sm m-2" *ngFor="let modelData of (vipraService.searchResults | orderBy:order)  " >
+          <div  class="col-sm col-sm-4 mt-2 mr-0" *ngFor="let modelData of (vipraService.searchResults | orderBy:order)  " >
             <div class="card features rounded p-4" (click)="viewModel(modelData._id)">
               <div class="card-body">
                 <h5 class="p-1">{{modelData.model_name}}</h5>
