@@ -2,9 +2,11 @@
 <div style="background-color: white">
   <div class="row m-1 border-bottom border-dark">
     <div class="col-8 text-left">
+      <br>
       <h3 m-1>Search Results</h3>
     </div>
     <div class="col-4 text-right">
+      <br>
       <div class="btn-group" dropdown>
         <button dropdownToggle type="button" class="btn btn-block btn-outline-secondary active dropdown-toggle">
           Sort By <span class="caret"></span>
@@ -96,7 +98,7 @@
       <div class="col-10">
         <div [hidden]="table" class="row">
           <div  class="col-sm m-2" *ngFor="let modelData of (vipraService.searchResults | orderBy:order)  " >
-            <div class="card features rounded p-4">
+            <div class="card features rounded p-4" (click)="viewModel(modelData._id)">
               <div class="card-body">
                 <h5 class="p-1">{{modelData.model_name}}</h5>
                 <div class="row p-2">
@@ -115,32 +117,31 @@
         </div>
 
 
-        <table [hidden]="!table" class="table table-bordered  table-hover mt-2" style="background: white">
-          <thead style="background: #1c214b; color: white">
-          <tr>
-            <th scope="col">Category</th>
-            <th scope="col">Model Name</th>
-            <th scope="col">Author</th>
-            <th scope="col">Accuracy</th>
-            <th scope="col">Optimizer</th>
-            <th scope="col">Framework</th>
-            <th scope="col">Year</th>
-            <!--<th scope="col">Brief Desc</th>-->
-            <!--<th scope="col">Rating</th>-->
-          </tr>
-          </thead>
-          <tbody>
-          <tr data-toggle="tooltip" data-placement="right" title="Click to view model"  style="pointer-events: fill;" *ngFor="let modelData of vipraService.searchResults  ">
-            <th scope="row">{{modelData.categoryID}}</th>
-            <td>{{modelData.model_name}}</td>
-            <td>{{modelData.Author}}</td>
-            <td>{{modelData.AccuracyValue}}</td>
-            <td>{{modelData.Optimizer}}</td>
-            <td>{{modelData.framework}}</td>
-            <td>{{modelData.Year}}</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-</div>
-</div>
+<table [hidden]="!table" class="table table-bordered  table-hover mt-2" style="background: white">
+  <thead style="background: #1c214b; color: white">
+  <tr>
+    <th scope="col">Category</th>
+    <th scope="col">Model Name</th>
+    <th scope="col">Author</th>
+    <th scope="col">Accuracy</th>
+    <th scope="col">Optimizer</th>
+    <th scope="col">Framework</th>
+    <th scope="col">Year</th>
+    <!--<th scope="col">Brief Desc</th>-->
+    <!--<th scope="col">Rating</th>-->
+  </tr>
+  </thead>
+  <tbody>
+  <tr data-toggle="tooltip" data-placement="right" title="Click to view model"  style="pointer-events: fill;" *ngFor="let modelData of vipraService.searchResults  ">
+    <th scope="row">{{modelData.categoryID}}</th>
+    <td>{{modelData.model_name}}</td>
+    <td>{{modelData.Author}}</td>
+    <td>{{modelData.AccuracyValue}}</td>
+    <td>{{modelData.Optimizer}}</td>
+    <td>{{modelData.framework}}</td>
+    <td>{{modelData.Year}}</td>
+  </tr>
+  </tbody>
+</table>
+
+

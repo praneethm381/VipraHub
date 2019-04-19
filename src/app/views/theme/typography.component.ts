@@ -8,11 +8,13 @@ import { OrderPipe } from 'ngx-order-pipe';
   templateUrl: 'typography.component.html'
 })
 export class TypographyComponent {
+
   listOfModels;
   search = { text: ''};
   order = 'AccuracyValue';
   listOfCategories;
   table = false;
+  public modelID;
   backup;
   displayCategory = true;
   displayRating = true;
@@ -45,6 +47,14 @@ export class TypographyComponent {
   showGrids() {
     this.table = true;
   }
+
+  viewModel(id){
+    localStorage.setItem('modelID',id);
+    this.router.navigate(['./theme/colors'])
+  }
+  // setOrder(value: string) {
+  //   this.order = value;
+  // }
   setOrder(value: string) {
     this.order = value;
   }

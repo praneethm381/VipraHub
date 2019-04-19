@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 import {MatTabsModule, MatSidenavModule} from '@angular/material';
 import {ViewmodeldashboardService} from '../../viewmodeldashboard.service';
+import {ViprahubService} from "../../viprahub.service";
 import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 
 
@@ -16,9 +17,11 @@ import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 })
 export class ColorsComponent implements OnInit {
   modelObj;
-  constructor(private viewmodelDashboardService:ViewmodeldashboardService) {
-     this.modelObj = this.viewmodelDashboardService.getModel();
-    console.log(this.modelObj);
+  modelID;
+  constructor(private viewmodelDashboardService:ViewmodeldashboardService, private viprahubService:ViprahubService) {
+     this.viprahubService.getModelById(localStorage.getItem('modelID')).subscribe(data=>{
+       this.modelObj = data;
+     });
   }
 
   public themeColors() {

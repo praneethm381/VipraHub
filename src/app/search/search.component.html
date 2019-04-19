@@ -17,7 +17,7 @@
   <hr class="style1">
   <div class="row p-5">
     <div  class="col-sm m-4" *ngFor="let modelData of (vipraService.searchResults | orderBy:order )  " >
-      <div class="card features rounded p-4">
+      <div class="card features rounded p-4" (click)="viewModel(modelData._id)">
         <div class="card-body">
           <h5 class="p-1">{{modelData.model_name}}</h5>
           <div class="row p-2">

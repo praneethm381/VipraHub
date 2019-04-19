@@ -39,6 +39,13 @@ router.post('/', function (req, res, next) {
   });
 });
 
+router.get('/getModel/:modelID', function(req, res, next){
+  modelsMetadata.findById({"_id": req.params.modelID}, function (err,post){
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
 // router.get('/get', function(req, res, next){
 //   modelsMetadata.find({}, function (err,data){
 //     if (err) return next(err);
