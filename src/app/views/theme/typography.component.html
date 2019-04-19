@@ -1,96 +1,189 @@
 <!--Search-->
+<div style="background-color: white">
+  <div class="row m-1 border-bottom border-dark">
+    <div class="col-8 text-left">
+      <h3 m-1>Search Results</h3>
+    </div>
+    <div class="col-4 text-right">
+      <div class="btn-group" dropdown>
+        <button dropdownToggle type="button" class="btn btn-block btn-outline-secondary active dropdown-toggle">
+          Sort By <span class="caret"></span>
+        </button>
+        <ul *dropdownMenu class="dropdown-menu" role="menu">
+          <li role="menuitem"><button class="dropdown-item"  (click)="setOrder('AccuracyValue')">Accuracy</button></li>
+          <li role="menuitem"><button class="dropdown-item"  (click)="setOrder('Year')">Year</button></li>
+        </ul>
+      </div>
+      <i class="fa fa-th fa-lg mt-1 ml-3 mr-3" (click)="showTiles()"></i>
+      <i class="fa fa-th-list fa-lg mt-1" (click)="showGrids()"></i>
+    </div>
+  </div>
 
-  <form>
-   <div class="form-row">
-      <div class="form-group col-4">
-        <label>Category</label>
-        <select class="form-control">
 
-          <option>Select Category...</option>
-          <option *ngFor="let category of listOfCategories" value="{{category.name}}">{{category.name}}</option>
-        </select>
-      </div>
-      <div class="form-group col-4">
-         <label>Search</label>
-         <input type="text" class="form-control" placeholder="Search.."/>
-      </div>
-      <div class="form-group col-4">
-        <label>Rating</label>
-        <select class="form-control">
-          <option>Select Rating...</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-   </div>
-    <div class="form-row">
-      <div class="col-12 text-right">
-        <i class="fa fa-th fa-lg mt-1 mr-3" (click)="showTiles()"></i>
-        <i class="fa fa-th-list fa-lg mt-1" (click)="showGrids()"></i>
-      </div>
-      <!--<div class="col-4">-->
+  <!--<form>-->
+   <!--<div class="form-row">-->
+      <!--<div class="form-group col-4">-->
+        <!--<label>Category</label>-->
+        <!--<select class="form-control" (change)="categoryDropdownChange($event.target.value)">-->
+
+          <!--<option>Select Category...</option>-->
+          <!--<option *ngFor="let category of listOfCategories" value="{{category.name}}">{{category.name}}</option>-->
+        <!--</select>-->
+      <!--</div>-->
+      <!--<div class="form-group col-4">-->
+         <!--<label>Search</label>-->
+         <!--<input type="text" class="form-control" placeholder="Search.." name="searchText" (keyup)="getResults()" [(ngModel)]="search.text"/>-->
+      <!--</div>-->
+      <!--<div class="form-group col-4">-->
+        <!--<label>Rating</label>-->
+        <!--<select class="form-control">-->
+          <!--<option>Select Rating...</option>-->
+          <!--<option>1</option>-->
+          <!--<option>2</option>-->
+          <!--<option>3</option>-->
+          <!--<option>4</option>-->
+          <!--<option>5</option>-->
+        <!--</select>-->
+      <!--</div>-->
+   <!--</div>-->
+    <!--<div class="form-row">-->
+      <!--<div class="col-10 text-right">-->
         <!--<div ngbDropdown class="rounded text-right" placement="bottom-right">-->
           <!--<button class="btn text-white backColorDarkBlue" id="dropdownBasic1" ngbDropdownToggle>Sort By</button>-->
           <!--<div ngbDropdownMenu aria-labelledby="dropdownBasic1">-->
-            <!--<button ngbDropdownItem >Accuracy</button>-->
-            <!--<button ngbDropdownItem >Year</button>-->
+            <!--<button ngbDropdownItem (click)="setOrder('AccuracyValue')">Accuracy</button>-->
+            <!--<button ngbDropdownItem (click)="setOrder('Year')">Year</button>-->
           <!--</div>-->
         <!--</div>-->
       <!--</div>-->
-    </div>
-  </form>
+      <!--<div class="col-2 text-right">-->
+        <!--<i class="fa fa-th fa-lg mt-1 mr-3" (click)="showTiles()"></i>-->
+        <!--<i class="fa fa-th-list fa-lg mt-1" (click)="showGrids()"></i>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</form>-->
 
 <!--Search Result-->
-
-<div [hidden]="table" class="row">
-  <div  class="col-sm m-4" *ngFor="let modelData of vipraService.searchResults  " >
-    <div class="card features rounded p-4">
-      <div class="card-body">
-        <h5 class="p-1">{{modelData.model_name}}</h5>
-        <div class="row p-2">
-          <div class="col-md-auto">
-            <b>Author</b> :  {{modelData.Author}}<br>
-            <b>Category</b> : {{modelData.categoryID}}<br>
-            <b>Accuracy</b> : {{modelData.AccuracyValue}}<br>
-            <b>Optimizer</b> : {{modelData.Optimizer}}<br>
-            <b>Framework</b> : {{modelData.framework}}<br>
-            <b>Year</b> : {{modelData.Year}}<br>
+<div class="row m-1">
+  <div class="col-2 boxshadow1">
+    <form>
+      <div class="row ml-25 mt-3">
+        <div class="col-12">
+          <u><h4>Filter By</h4></u>
+        </div>
+      </div>
+      <div class="form-group row ml-25 mt-2" >
+        <div class="col-8 text-left">
+          <label class=""><b>Category</b></label>
+        </div>
+        <div class="col-4">
+          <i class="fa fa-plus fa-lg" [hidden]="displayCategory" (click)="expandCategory()"></i>
+          <i class="fa fa-minus fa-lg" [hidden]="!displayCategory" (click)="contractCategory()"></i>
+        </div>
+      </div>
+      <div class="row" [hidden]="!displayCategory">
+        <div class="col-md-12">
+          <div class="form-check" *ngFor="let category of listOfCategories">
+            <input class="form-check-input" type="checkbox" value="{{category.name}}" id="{{category._id}}">
+            <label class="form-check-label" for="{{category._id}}">
+              {{category.name}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row form-group mt-3 ml-25">
+        <div class="col-8 text-left">
+          <label class=""><b>Rating</b></label>
+        </div>
+        <div class="col-4">
+          <i class="fa fa-plus fa-lg" [hidden]="displayRating" (click)="expandRating()"></i>
+          <i class="fa fa-minus fa-lg" [hidden]="!displayRating" (click)="contractRating()"></i>
+        </div>
+      </div>
+      <div class="row" [hidden]="!displayRating">
+        <div class="col-md-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="1" id="1">
+            <label class="form-check-label" for="1">
+              1
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="2" id="2">
+            <label class="form-check-label" for="2">
+              2
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="3" id="3">
+            <label class="form-check-label" for="3">
+              3
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="4" id="4">
+            <label class="form-check-label" for="4">
+              4
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="5" id="5">
+            <label class="form-check-label" for="5">
+              5
+            </label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-10">
+    <div [hidden]="table" class="row">
+      <div  class="col-sm m-4" *ngFor="let modelData of (vipraService.searchResults | orderBy:order)  " >
+        <div class="card features rounded p-4">
+          <div class="card-body">
+            <h5 class="p-1">{{modelData.model_name}}</h5>
+            <div class="row p-2">
+              <div class="col-md-auto">
+                <b>Author</b> :  {{modelData.Author}}<br>
+                <b>Category</b> : {{modelData.categoryID}}<br>
+                <b>Accuracy</b> : {{modelData.AccuracyValue}}<br>
+                <b>Optimizer</b> : {{modelData.Optimizer}}<br>
+                <b>Framework</b> : {{modelData.framework}}<br>
+                <b>Year</b> : {{modelData.Year}}<br>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+
+    <table [hidden]="!table" class="table table-bordered  table-hover mt-2" style="background: white">
+      <thead style="background: #1c214b; color: white">
+      <tr>
+        <th scope="col">Category</th>
+        <th scope="col">Model Name</th>
+        <th scope="col">Author</th>
+        <th scope="col">Accuracy</th>
+        <th scope="col">Optimizer</th>
+        <th scope="col">Framework</th>
+        <th scope="col">Year</th>
+        <!--<th scope="col">Brief Desc</th>-->
+        <!--<th scope="col">Rating</th>-->
+      </tr>
+      </thead>
+      <tbody>
+      <tr data-toggle="tooltip" data-placement="right" title="Click to view model"  style="pointer-events: fill;" *ngFor="let modelData of vipraService.searchResults  ">
+        <th scope="row">{{modelData.categoryID}}</th>
+        <td>{{modelData.model_name}}</td>
+        <td>{{modelData.Author}}</td>
+        <td>{{modelData.AccuracyValue}}</td>
+        <td>{{modelData.Optimizer}}</td>
+        <td>{{modelData.framework}}</td>
+        <td>{{modelData.Year}}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>
-
-
-<table [hidden]="!table" class="table table-bordered  table-hover mt-2" style="background: white">
-  <thead style="background: #1c214b; color: white">
-  <tr>
-    <th scope="col">Category</th>
-    <th scope="col">Model Name</th>
-    <th scope="col">Author</th>
-    <th scope="col">Accuracy</th>
-    <th scope="col">Optimizer</th>
-    <th scope="col">Framework</th>
-    <th scope="col">Year</th>
-    <!--<th scope="col">Brief Desc</th>-->
-    <!--<th scope="col">Rating</th>-->
-  </tr>
-  </thead>
-  <tbody>
-  <tr data-toggle="tooltip" data-placement="right" title="Click to view model"  style="pointer-events: fill;" *ngFor="let modelData of vipraService.searchResults  ">
-    <th scope="row">{{modelData.categoryID}}</th>
-    <td>{{modelData.model_name}}</td>
-    <td>{{modelData.Author}}</td>
-    <td>{{modelData.AccuracyValue}}</td>
-    <td>{{modelData.Optimizer}}</td>
-    <td>{{modelData.framework}}</td>
-    <td>{{modelData.Year}}</td>
-  </tr>
-  </tbody>
-</table>
-
-
+</div>
