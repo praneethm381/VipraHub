@@ -1,6 +1,10 @@
 .logo{
   width:60px;
 }
+.btn-info{
+  background-color: #073340;
+  border-color: #0e4656;
+}
 header[role=banner] {
   position: fixed;
   top: 0;
