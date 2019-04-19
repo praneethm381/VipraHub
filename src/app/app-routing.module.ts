@@ -33,7 +33,7 @@ export const routes: Routes = [
   {path: 'landing', component: HomeComponent},
 
   {
-    path: 'register',
+    path: 'registration',
     component: RegistrationComponent,
     data: {
       title: 'Register Page'
