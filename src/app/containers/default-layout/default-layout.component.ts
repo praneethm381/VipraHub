@@ -30,7 +30,7 @@ export class DefaultLayoutComponent implements OnDestroy {
   getResults() {
     this.vipraService.searchText = this.search.text;
     this.vipraService.getSearchResults(this.search.text);
-    // this.router.navigate(['/search']);
+    this.router.navigate(['/theme/typography']);
   }
 
   ngOnDestroy(): void {
