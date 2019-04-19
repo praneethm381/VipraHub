@@ -6,7 +6,7 @@
 <!--Model Overview-->
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">Model Title</h5>
+    <h5 class="card-title">{{modelObj.model_name}}</h5>
     <div class="pull-right">
       <span class="fa fa-star checked"></span>
       <span class="fa fa-star checked"></span>
@@ -14,23 +14,32 @@
       <span class="fa fa-star"></span>
       <span class="fa fa-star"></span>
     </div>
-    <h6 class="card-subtitle mb-2 text-muted">Model Category</h6>
-    <p class="card-text">Quick sample text to create the card title and make up the body of the card's content.
-      Quick sample text to create the card title and make up the body of the card's content
-      Quick sample text to create the card title and make up the body of the card's content
-      Quick sample text to create the card title and make up the body of the card's content
-      Quick sample text to create the card title and make up the body of the card's content
-      Quick sample text to create the card title and make up the body of the card's content</p>
+    <h6 class="card-subtitle mb-2 text-muted">{{modelObj.categoryID}}</h6>
+    <p class="card-text"></p>
     <button (click)="downloadModel()">Download</button>
   </div>
 </div>
 <!--Model detailed view-->
 <div>
   <!-- Nav tabs -->
-  <tabset>
-    <tab heading="OVERVIEW" class="container">
+  <tabset *ngIf="modelObj">
+    <tab heading="OVERVIEW">
       <br/>
-     <div>
+      <div style="padding-left: 20px">
+        <p>Model Name : {{modelObj.model_name}}</p>
+        <p>Author : {{modelObj.Author}}</p>
+        <p>Category : {{modelObj.categoryID}}</p>
+        <p>Framework : {{modelObj.framework}}</p>
+        <p>Size : {{modelObj.size}}</p>
+        <p>Input Tensors : {{modelObj.InputTensors}}</p>
+        <p>Output Tensors : {{modelObj.OutputTensor}}</p>
+        <p>Optimizer : {{modelObj.Optimizer}}</p>
+        <p>Loss Function : {{modelObj.LossFunction}}</p>
+        <p>Accuracy Value : {{modelObj.AccuracyValue}}</p>
+        <p>Loss Value : {{modelObj.LossValue}}</p>
+        <p>Year : {{modelObj.Year}}</p>
+      </div>
+     <!--<div>
        <h4>DESCRIPTION</h4>
        <p>{{modelObj.Overview.DESCRIPTION}}</p>
      </div>
@@ -49,10 +58,10 @@
       <div>
         <h4>ARCHITECTURE</h4>
         <p>{{modelObj.Overview.ARCHITECTURE}}</p>
-      </div>
+      </div>-->
     </tab>
     <tab heading="PUBLICATION">
-      <div>
+     <!-- <div>
         <h4>TITLE</h4>
         <p>{{modelObj.Publication.TITLE}}</p>
       </div>
@@ -67,9 +76,10 @@
       <div>
         <h4>YEAR</h4>
         <p>{{modelObj.Publication.YEAR}}</p>
-      </div>
+      </div>-->
     </tab>
     <tab heading="ARCHITECTURE">
+      <img [src]="modelObj.URL"/>
     </tab>
     <tab heading="TEST">
       <h6>Comming Soon....</h6>

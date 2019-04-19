@@ -16,9 +16,12 @@ import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 })
 export class ColorsComponent implements OnInit {
   modelObj;
-  constructor(private viewmodelDashboardService: ViewmodeldashboardService, private http: HttpClient) {
-     this.modelObj = this.viewmodelDashboardService.getModel();
-    console.log(this.modelObj);
+  constructor(private viewModelDashboardService:ViewmodeldashboardService, private http: HttpClient) {
+    console.log('Hi')
+    this.viewModelDashboardService.getModel().subscribe(data=>{
+       this.modelObj= data;
+       console.log(this.modelObj);
+     });
   }
 
   public themeColors() {
