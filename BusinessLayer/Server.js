@@ -7,17 +7,19 @@ var apiRouterUpload = require('./routes/upload');
 var apiRouterUploadMongo = require('./routes/uploadMongo');
 var path = require('path');
 require('./resources/db');
+const app = express();
 const cors=require('cors');
 const bodyParser =require('body-parser');
 const registrationRoute = require('./routes/registration');
 const loginRoute = require('./routes/login');
 const viewModelRoute = require('./routes/viewModel')
 
-const app = express();
+
 
 app.use(express.json());
 app.use(bodyParser.json())
 app.use(cors());
+
 app.use(express.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, '../dist/viprahub')));
 app.use('/home', express.static(path.join(__dirname, '../dist/viprahub')));
@@ -40,11 +42,7 @@ app.use('/viewModel', viewModelRoute);
 
 var port = process.env.PORT || 4000;
 app.set('port', port);
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+
 var server = http.createServer(app);
 
 

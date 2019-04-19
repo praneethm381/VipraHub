@@ -5,6 +5,11 @@ var upload= require('../services/uploadMongo.service');
 var uploadFile = require('../models/upload');
 var mongoose = require('mongoose');
 var Grid = require('gridfs-stream');
+var path = require('path');
+const fs = require('fs');
+var Archiver = require('archiver');
+
+
 
 router.post('/models', (req,res) => {
   console.log(req.body);
@@ -135,6 +140,32 @@ router.get('/files', (req, res, next) => {
     res.json(filesData);
   });
 });
+
+router.get('/zipfiles', (req, response) => {
+
+  response.writeHead(200, {
+    'Content-Type': 'application/zip',
+    'Content-disposition': 'attachment; filename=myFile.zip'
+  });
+  var zip = Archiver('zip');
+
+  // Send the file to the page output.
+  zip.pipe(response);
+
+  // Create zip with some files. Two dynamic, one static. Put #2 in a sub folder.
+  // zip.append('Some text to go in file 1.', { name: '1.txt' })
+  //   .append('Some text to go in file 2. I go in a folder!', { name: 'somefolder/2.txt' })
+  //   .file('./routes/input.txt', { name: '3.txt' })
+  //   .finalize();
+  zip.directory('../uploads/', false)
+    .finalize();
+
+  //res.download("./routes/input.txt");
+
+
+});
+
+
 
 
 module.exports = router;

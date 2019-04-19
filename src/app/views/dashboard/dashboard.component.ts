@@ -384,7 +384,6 @@ export class DashboardComponent implements OnInit {
   public random(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
-
   public openUploadDownloadComponent() {
     this.dialogService.open(UploadDownloadComponent, {
     });
