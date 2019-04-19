@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ViprahubService} from '../../viprahub.service';
 import {Router} from '@angular/router';
 import { OrderPipe } from 'ngx-order-pipe';
-
 
 @Component({
   templateUrl: 'typography.component.html'
@@ -14,6 +13,9 @@ export class TypographyComponent {
   order = 'AccuracyValue';
   listOfCategories;
   table = false;
+  backup;
+  displayCategory = true;
+  displayRating = true;
 
   constructor(private http: HttpClient, private vipraService: ViprahubService, private router: Router, private orderPipe: OrderPipe) {
     // this.listOfModels = this.orderPipe.transform(this.vipraService.searchResults, this.order);
@@ -31,21 +33,39 @@ export class TypographyComponent {
     }, err => {
       console.log(err);
     });
-
   }
   getResults() {
     this.vipraService.searchText = this.search.text;
     this.vipraService.getSearchResults(this.search.text);
-    this.router.navigate(['/search']);
+    // this.router.navigate(['/search']);
   }
   showTiles() {
     this.table = false;
   }
-
   showGrids() {
     this.table = true;
   }
-  // setOrder(value: string) {
-  //   this.order = value;
-  // }
+  setOrder(value: string) {
+    this.order = value;
+  }
+  categoryDropdownChange(category) {
+    console.log(category);
+    this.backup = this.vipraService.searchResults;
+    const result = this.backup.filter(element => {
+      return element.categoryID === category;
+    });
+    this.vipraService.searchResults = result;
+  }
+  expandCategory() {
+    this.displayCategory = true;
+  }
+  contractCategory() {
+    this.displayCategory = false;
+  }
+  expandRating() {
+    this.displayRating = true;
+  }
+  contractRating() {
+    this.displayRating = false;
+  }
 }

@@ -13,7 +13,8 @@ var metadataSchema = new mongoose.Schema({
   Optimizer:{type:String, text: true},
   LossFunction:{type:String, text: true},
   AccuracyValue:{type:String, text: true},
-  LossValue:{type:String, text: true}
+  LossValue:{type:String, text: true},
+  Year:{type:String, text: true}
 });
 
 metadataSchema.index({Author: 'text', model_name: 'text', categoryID: 'text'});

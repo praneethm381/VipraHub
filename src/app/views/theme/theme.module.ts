@@ -9,6 +9,9 @@ import { TypographyComponent } from './typography.component';
 import { ThemeRoutingModule } from './theme-routing.module';
 import {MatTabsModule, MatSidenavModule} from '@angular/material';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { FormsModule } from '@angular/forms';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { OrderModule } from 'ngx-order-pipe';
 
 @NgModule({
   imports: [
@@ -16,7 +19,10 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     ThemeRoutingModule,
     MatTabsModule,
     MatSidenavModule,
+    OrderModule,
     TabsModule,
+    FormsModule,
+    BsDropdownModule.forRoot()
   ],
   declarations: [
     ColorsComponent,
