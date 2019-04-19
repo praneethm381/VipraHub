@@ -88,7 +88,7 @@ router.get('/chunks/:fileID', function(req, res, next){
   var gfs = Grid(conn.db, mongoose.mongo);
   gfs.collection('uploadFiles'); // set the collection to look up into
   console.log(req.params.fileID);
-  gfs.files.findOne({ filename: "WhatsApp Image 2019-03-17 at 12.41.17 AM.jpeg" }, (err, file) => {
+  gfs.files.findOne({ filename: "CNN011019-223859_architecture.jpg" }, (err, file) => {
     // Check if the input is a valid image or not
     if (!file || file.length === 0) {
       return res.status(404).json({

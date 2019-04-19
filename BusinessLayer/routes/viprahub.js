@@ -42,8 +42,10 @@ router.post('/', function (req, res, next) {
 router.get('/getModel/:modelID', function(req, res, next){
   modelsMetadata.findById({"_id": req.params.modelID}, function (err,post){
     if (err) return next(err);
+    //data.URL = "http://localhost:4000/uploadToMongo/chunks/ahhgshgs";
+    post.URL = "http://localhost:4000/uploadToMongo/chunks/ahhgshgs";
     res.json(post);
-  });
+  }).lean().exec();
 });
 
 // router.get('/get', function(req, res, next){
