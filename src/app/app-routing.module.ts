@@ -19,7 +19,7 @@ import {ViewmodeldashboardComponent} from './viewmodeldashboard/viewmodeldashboa
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'landing',
     pathMatch: 'full',
   },
   {
@@ -43,7 +43,7 @@ export const routes: Routes = [
     path: '',
     component: DefaultLayoutComponent,
     data: {
-      title: 'Home'
+      title: ''
     },
     children: [
       {

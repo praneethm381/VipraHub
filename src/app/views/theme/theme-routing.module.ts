@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'Theme'
+      title: ''
     },
     children: [
       {
@@ -19,14 +19,14 @@ const routes: Routes = [
         path: 'colors',
         component: ColorsComponent,
         data: {
-          title: 'Colors'
+          title: 'Upload'
         }
       },
       {
         path: 'typography',
         component: TypographyComponent,
         data: {
-          title: 'Typography'
+          title: 'Search Model'
         }
       }
       // {
