@@ -3,6 +3,12 @@
        [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
        (fileOver)="fileOverBase($event)"
        [uploader]="uploader">
+
+    <button type="button" mat-mini-fab color="warn" class="float-right"
+            (click)="dialogRef.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+   <div> <h3>Upload Files</h3></div>
     <div class="row col-md-12">
       <div class="col-md-3 form-group">
         <label>Category ID: </label>
@@ -26,7 +32,7 @@
 
     <br>
     <div class="col-md-12">
-      <h3>Upload queue</h3>
+      <h4>Uploaded Queue</h4>
       <p>File(s) Selected: {{ uploader?.queue?.length }}</p>
       <table class="table">
         <thead>
@@ -79,25 +85,21 @@
           </div>
           <hr>
         </div>
-        <div>
-        <button type="button" class="btn btn-success btn-s"
+        <div class="example-button-row">
+              <button type="button" mat-raised-button color="primary"
                 (click)="checkIfModelNameIsAlreadyPresent()" [disabled]="!uploader.getNotUploadedItems().length">
-          <span class="fa fa-upload"></span> Upload all
-        </button>
-        <button type="button" class="btn btn-warning btn-s"
+                  <i class="fa fa-upload"></i> Upload all
+               </button>
+               <button type="button"  mat-raised-button color="accent"
                 (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
-          <span class="fa fa-ban"></span> Cancel all
-        </button>
-        <button type="button" class="btn btn-danger btn-s"
+                  <i class="fa fa-ban"></i> Cancel all
+               </button>
+               <button type="button" mat-raised-button color="warn"
                 (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
-          <span class="fa fa-trash"></span> Remove all
-        </button>
-        <button type="button" class="btn btn-danger btn-s"
-                (click)="dialogRef.close()">
-          <span class="fa fa-trash"></span> Close
-        </button>
+                  <i class="fa fa-trash"></i> Remove all
+                </button>
+           </div>
         </div>
-      </div>
     </div>
   </div>
 </div>
