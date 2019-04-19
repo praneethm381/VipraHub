@@ -1,4 +1,3 @@
-//       TYPE: 'Supervised learning',
 const express = require('express');
 const viewModelRouter = express.Router();
 const modelsMetadata = require('../models/modelsMetadata');
