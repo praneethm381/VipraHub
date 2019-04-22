@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { ColorsComponent } from './colors.component';
 import { TypographyComponent } from './typography.component';
 import {MatButtonModule} from '@angular/material';
+import {TestingComponent} from './testing.component';
 
 // Theme Routing
 import { ThemeRoutingModule } from './theme-routing.module';
@@ -28,7 +29,8 @@ import { OrderModule } from 'ngx-order-pipe';
   ],
   declarations: [
     ColorsComponent,
-    TypographyComponent
+    TypographyComponent,
+    TestingComponent
   ]
 })
 export class ThemeModule { }
