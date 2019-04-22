@@ -29,9 +29,9 @@ export class ShowImageComponent implements OnInit {
 
   }
 
-  showImage() {
+ /* showImage() {
     console.log('inside show image');
-    this.loading = true;
+ /!*   this.loading = true;
     // this.loggedinUserInfoService.userInfo.emailID
     this.modelsService.getModelsBasedOnModelName(this.modelname,'navmad@test.com').subscribe(response => {
       if (response.length === 0) {
@@ -73,5 +73,6 @@ export class ShowImageComponent implements OnInit {
   //       }
   //     }
   //   });
-  // }
+  // }*!/
+}*/
 }

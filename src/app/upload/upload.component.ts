@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 export class UploadDownloadComponent implements OnInit {
 
   private files = [];
-  private url = 'http://localhost:4000/uploadToMongo/files';
+  private url = '/uploadToMongo/files';
   // private url = 'http://localhost:4000/upload';
   private uploader: FileUploader;
   public categories: any[];
@@ -23,6 +23,7 @@ export class UploadDownloadComponent implements OnInit {
   // public selectedId: any;
   public selectedcategory: any;
   public modelname: any;
+  public experiment: any;
   public alreadyModelNamePresent: any;
   public IsFilesUploadedSuccessfully: any = false;
   public filesArray: Array<any> = [];
@@ -48,25 +49,30 @@ export class UploadDownloadComponent implements OnInit {
   }
 
   checkIfModelNameIsAlreadyPresent() {
-    this.alreadyModelNamePresent = this.allModelsFromDb.filter((model) => model.userId === this.loggedinUserInfoService.userInfo.emailID && model.name === this.modelname).length > 0;
+    this.alreadyModelNamePresent = this.allModelsFromDb.filter((model) => model.userId === this.loggedinUserInfoService.userInfo.emailID && model.experiment === this.experiment).length > 0;
 
     if ((typeof(this.alreadyModelNamePresent) === 'undefined') || this.alreadyModelNamePresent) {
-      alert('Error: Duplicate model name. Please enter another model name.');
+      alert('Error: Duplicate Experiment name. Please enter another experiment name.');
     } else {
       this.uploader.uploadAll();
 
       this.uploader.onSuccessItem = (item: FileItem, response: string) => {
         const res = JSON.parse(response); // success server response
         console.log(this.selectedcategory);
-        this.filesArray.push(res.file_id)
+        this.filesArray.push(res.file_id);
       };
 
       this.uploader.onCompleteAll = () => {
-        this.modelsService.uploadModel({userId: this.loggedinUserInfoService.userInfo.emailID, categoryId: this.selectedcategory, name: this.modelname, fileReferenceIDs: this.filesArray})
+        this.modelsService.uploadModel({
+          userId: this.loggedinUserInfoService.userInfo.emailID,
+          categoryId: this.selectedcategory,
+          name: this.modelname,
+          experiment: this.experiment,
+          fileReferenceIDs: this.filesArray})
           .subscribe((post) => {
             console.log('Upload Model created with parameters');
           });
-      }
+      };
       this.IsFilesUploadedSuccessfully = true;
     }
   }
