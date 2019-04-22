@@ -5,11 +5,6 @@ var upload= require('../services/uploadMongo.service');
 var uploadFile = require('../models/upload');
 var mongoose = require('mongoose');
 var Grid = require('gridfs-stream');
-var path = require('path');
-const fs = require('fs');
-var Archiver = require('archiver');
-
-
 
 router.post('/models', (req,res) => {
   console.log(req.body);
@@ -21,20 +16,32 @@ router.post('/models', (req,res) => {
 });
 
 router.get('/models', function (req, res, next) {
-  console.log(req.body.files);
   console.log('inside models')
   var name = req.query.name;
-  if (name == undefined || name == "" || name == null)
-  {
-    uploadFile.find(function (err, data) {
-      if (err) return next(err);
-      res.json(data);
-    });
-  }else{
-    uploadFile.find({"name": req.query.name, "userId": req.query.userID}, function (err,post){
+  var userID = req.query.userID;
+
+  console.log(name)
+  console.log(userID)
+
+  if ((name != undefined && name != "" && name != null) && (userID != undefined && userID != "" && userID != null)){
+    console.log('both name and userID are given')
+    uploadFile.find({"name": name, "userId": userID}, function (err,post){
       if (err) return next(err);
       console.log(post)
       res.json(post);
+    });
+  } else if ((userID != undefined && userID != "" && userID != null)){
+    console.log('userId is given')
+    uploadFile.find({"userId": userID}, function (err,post){
+      if (err) return next(err);
+      console.log(post)
+      res.json(post);
+    });
+  } else if((name == undefined ) && (userID == undefined)) {
+    console.log('name and userId are not given')
+    uploadFile.find(function (err, data) {
+      if (err) return next(err);
+      res.json(data);
     });
   }
 });
@@ -48,7 +55,6 @@ router.get('/models/:name', function(req, res, next){
 });
 
 router.post('/files', (req, res) => {
-  console.log(req.body.files);
   upload(req,res, (err) => {
     if(err){
       console.log("Error in uploading file : "+err);
@@ -88,7 +94,7 @@ router.get('/chunks/:fileID', function(req, res, next){
   var gfs = Grid(conn.db, mongoose.mongo);
   gfs.collection('uploadFiles'); // set the collection to look up into
   console.log(req.params.fileID);
-  gfs.files.findOne({ filename: "CNN011019-223859_architecture.jpg" }, (err, file) => {
+  gfs.files.findOne({ filename: "WhatsApp Image 2019-03-17 at 12.41.17 AM.jpeg" }, (err, file) => {
     // Check if the input is a valid image or not
     if (!file || file.length === 0) {
       return res.status(404).json({
@@ -140,32 +146,6 @@ router.get('/files', (req, res, next) => {
     res.json(filesData);
   });
 });
-
-router.get('/zipfiles', (req, response) => {
-
-  response.writeHead(200, {
-    'Content-Type': 'application/zip',
-    'Content-disposition': 'attachment; filename=myFile.zip'
-  });
-  var zip = Archiver('zip');
-
-  // Send the file to the page output.
-  zip.pipe(response);
-
-  // Create zip with some files. Two dynamic, one static. Put #2 in a sub folder.
-  // zip.append('Some text to go in file 1.', { name: '1.txt' })
-  //   .append('Some text to go in file 2. I go in a folder!', { name: 'somefolder/2.txt' })
-  //   .file('./routes/input.txt', { name: '3.txt' })
-  //   .finalize();
-  zip.directory('../uploads/', false)
-    .finalize();
-
-  //res.download("./routes/input.txt");
-
-
-});
-
-
 
 
 module.exports = router;

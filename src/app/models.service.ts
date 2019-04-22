@@ -7,7 +7,7 @@ const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
-const apiModels = 'http://localhost:4000/uploadToMongo';
+const apiModels = '/uploadToMongo';
 
 @Injectable()
 export class ModelsService {
@@ -39,15 +39,22 @@ export class ModelsService {
   }
 
   getAllModels(): Observable<any> {
-    console.log("inside get all models...")
+    console.log('inside get all models...');
     return this.http.get(`${apiModels}/models`, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
 
-  getModelsBasedOnModelName(name: string, userID: string): Observable<any> {
-    console.log("inside files service getmodelsonname"+name);
-    return this.http.get(`${apiModels}/models?name=`+name+'&userID='+userID, httpOptions).pipe(
+  getModelsBasedOnModelNameAndUserID(name: string, userID: string): Observable<any> {
+    console.log('inside files service getmodelsonname' + name + ' ' + userID);
+    return this.http.get(`${apiModels}/models?name=` + name + '&userID=' + userID, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+  getModelsBasedOnUserID(userID: string): Observable<any> {
+    console.log('inside files service getmodelsonname ' + userID);
+    return this.http.get(`${apiModels}/models?userID=` + userID, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
