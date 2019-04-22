@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {ViprahubService} from '../../viprahub.service';
 import {Router} from '@angular/router';
 import { OrderPipe } from 'ngx-order-pipe';
+import {LoggedinUserInfoService} from '../../services/loggedin-user-info.service';
 
 @Component({
   templateUrl: 'typography.component.html'
@@ -15,17 +16,19 @@ export class TypographyComponent {
   listOfCategories;
   table = false;
   public modelID;
-  backup;
   displayCategory = true;
   displayRating = true;
   categoryList = [];
   result = [];
+  filterSelected = [];
+  ratingsList = [{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}];
 
-  constructor(private http: HttpClient, private vipraService: ViprahubService, private router: Router, private orderPipe: OrderPipe) {
+  constructor(private http: HttpClient, private vipraService: ViprahubService, private router: Router,
+              private orderPipe: OrderPipe, private userInfo: LoggedinUserInfoService) {
     // this.listOfModels = this.orderPipe.transform(this.vipraService.searchResults, this.order);
-    console.log(this.listOfModels);
+    console.log(userInfo.userInfo);
     this.vipraService.getMetadata().subscribe(res => {
-      this.backup = res;
+      this.vipraService.backupResults = res;
       this.vipraService.searchResults = res;
     }, err => {
       console.log(err);
@@ -37,12 +40,6 @@ export class TypographyComponent {
     }, err => {
       console.log(err);
     });
-  }
-  getResults() {
-    this.vipraService.searchText = this.search.text;
-    this.vipraService.getSearchResults(this.search.text);
-    this.backup = this.vipraService.searchResults;
-    // this.router.navigate(['/search']);
   }
   showTiles() {
     this.table = false;
@@ -57,43 +54,53 @@ export class TypographyComponent {
   setOrder(value: string) {
     this.order = value;
   }
-  categoryChecked(e) {
+  filterChecked(e) {
     const finalResult = [];
     if (e.target.checked) {
-    this.categoryList.push(e.target.id);
-    this.categoryList.forEach(item => {
-      this.result = this.backup.filter(element => {
-        return element.categoryID === item;
+    this.filterSelected.push(e.target.id);
+    this.filterSelected.forEach(item => {
+      this.result = this.vipraService.backupResults.filter(element => {
+        return element.categoryID === item || element.Rating === item;
       });
       this.result.forEach(element => {
         finalResult.push(element);
       });
     });
     } else {
-      const index: number = this.categoryList.indexOf(e.target.id);
+      const index: number = this.filterSelected.indexOf(e.target.id);
       if (index !== -1) {
-        this.categoryList.splice(index, 1);
+        this.filterSelected.splice(index, 1);
       }
-      if (this.categoryList.length > 0) {
-        this.categoryList.forEach(item => {
-          this.result = this.backup.filter(element => {
-            return element.categoryID === item;
+      if (this.filterSelected.length > 0) {
+        this.filterSelected.forEach(item => {
+          this.result = this.vipraService.backupResults.filter(element => {
+            return element.categoryID === item || element.Rating === item;
           });
           this.result.forEach(element => {
             finalResult.push(element);
           });
         });
       } else {
-        this.backup.forEach(element => {
+        this.vipraService.backupResults.forEach(element => {
           finalResult.push(element);
         });
       }
     }
-    console.log(this.categoryList);
+    console.log(this.filterSelected);
     console.log(this.result);
     console.log(finalResult);
     this.vipraService.searchResults = finalResult;
   }
+  // ratingChecked(e) {
+  //   if (e.target.checked) {
+  //     this.selectedRatings.push(e.target.id);
+  //     this.selectedRatings.forEach(item => {
+  //       this.result = this.vipraService.backupResults.filter(element => {
+  //         return element.categoryID === item;
+  //       });
+  //     });
+  //   }
+  // }
   expandCategory() {
     this.displayCategory = true;
   }

@@ -4,7 +4,7 @@ import { navItems } from '../../_nav';
 import {ViprahubService} from '../../viprahub.service';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-
+import {LoggedinUserInfoService} from '../../services/loggedin-user-info.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,11 +16,14 @@ export class DefaultLayoutComponent implements OnDestroy {
   private changes: MutationObserver;
   public element: HTMLElement;
   search = { text: ''};
-  constructor(public router: Router, private http: HttpClient, public vipraService: ViprahubService, @Inject(DOCUMENT) _document?: any) {
+  userEmail;
+  constructor(public router: Router, private http: HttpClient,
+              private userInfo: LoggedinUserInfoService, public vipraService: ViprahubService, @Inject(DOCUMENT) _document?: any) {
 
     this.changes = new MutationObserver((mutations) => {
       this.sidebarMinimized = _document.body.classList.contains('sidebar-minimized');
     });
+    this.userEmail = this.userInfo['emailID'];
     this.element = _document.body;
     this.changes.observe(<Element>this.element, {
       attributes: true,

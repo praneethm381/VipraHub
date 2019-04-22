@@ -18,6 +18,7 @@ const apiUrlUserModelsData = 'http://localhost:4000/usermodels';
 export class ViprahubService {
   public searchText;
   public searchResults;
+  public backupResults;
   constructor(private http: HttpClient) {
   }
 
@@ -75,6 +76,7 @@ export class ViprahubService {
     this.searchMetadataByText(text).subscribe(res => {
       console.log(res);
       this.searchResults = res;
+      this.backupResults = res;
     }, err => {
       console.log(err);
     });

@@ -11,12 +11,46 @@ router.get('/getAll', function (req, res, next) {
   var q = req.query.q;
   if (q == undefined || q == "" || q == null)
   {
-    modelsMetadata.find({}, function (err, data) {
+    modelsMetadata.aggregate([{"$sort": { "model_name": 1, "AccuracyValue": -1 } },
+    { $group: {
+      _id: "$model_name",
+        id: {"$first": "$_id"},
+      experiment: { "$first": "$experiment" },
+      model_name: { "$first": "$model_name" },
+      AccuracyValue: { "$first": "$AccuracyValue" },
+      Author: { "$first": "$Author" },
+      categoryID: { "$first": "$categoryID" },
+      framework: { "$first": "$framework" },
+      InputTensors: { "$first": "$InputTensors" },
+      Year: { "$first": "$Year" },
+      Rating: { "$first": "$Rating" },
+      Optimizer: { "$first": "$Optimizer" }
+    }}], function (err, data) {
       if (err) return next(err);
       res.json(data);
     });
   } else {
-    modelsMetadata.find({ $or: [{"model_name": new RegExp(q, "gi")}, {"Author": new RegExp(q, "gi")}, {"categoryID": new RegExp(q, "gi")}, {"framework": new RegExp(q, "gi")}, {"size": new RegExp(q, "gi")}, {"epochs": new RegExp(q, "gi")}, {"layersCount": new RegExp(q, "gi")}, {"InputTensors": new RegExp(q, "gi")}, {"OutputTensor": new RegExp(q, "gi")}, {"Optimizer": new RegExp(q, "gi")}, {"LossFunction": new RegExp(q, "gi")},{"AccuracyValue": new RegExp(q, "gi")},{"LossValue": new RegExp(q, "gi")},{"Year": new RegExp(q, "gi")}]}, function (err, data) {
+    modelsMetadata.aggregate([{ $match: { $or: [{"model_name": new RegExp(q, "gi")}, {"Author": new RegExp(q, "gi")},
+        {"categoryID": new RegExp(q, "gi")}, {"framework": new RegExp(q, "gi")}, {"size": new RegExp(q, "gi")},
+        {"epochs": new RegExp(q, "gi")}, {"layersCount": new RegExp(q, "gi")}, {"InputTensors": new RegExp(q, "gi")},
+        {"OutputTensor": new RegExp(q, "gi")}, {"Optimizer": new RegExp(q, "gi")}, {"LossFunction": new RegExp(q, "gi")},
+        {"AccuracyValue": new RegExp(q, "gi")},{"LossValue": new RegExp(q, "gi")},{"Year": new RegExp(q, "gi")},
+        {"experiment": new RegExp(q, "gi")}, {"Rating": new RegExp(q, "gi")}]}},
+      {"$sort": { "model_name": 1, "AccuracyValue": -1 } },
+      { $group: {
+          _id: "$model_name",
+          id: {"$first": "$_id"},
+          experiment: { "$first": "$experiment" },
+          model_name: { "$first": "$model_name" },
+          AccuracyValue: { "$first": "$AccuracyValue" },
+          Author: { "$first": "$Author" },
+          categoryID: { "$first": "$categoryID" },
+          framework: { "$first": "$framework" },
+          InputTensors: { "$first": "$InputTensors" },
+          Year: { "$first": "$Year" },
+          Rating: { "$first": "$Rating" },
+          Optimizer: { "$first": "$Optimizer" }
+      }}], function (err, data) {
       if (err) return next(err);
       res.json(data);
     });

@@ -31,8 +31,8 @@ export class SearchComponent implements OnInit {
   setOrder(value: string) {
     this.order = value;
   }
-  viewModel(id){
-    localStorage.setItem('modelID',id);
+  viewModel(id) {
+    localStorage.setItem('modelID', id);
     this.router.navigate(['./theme/colors'])
   }
 }

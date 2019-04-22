@@ -54,8 +54,8 @@
       </div>
     </div>
       <div class="row m-5">
-        <div  class="col-sm" *ngFor="let modelData of (listOfModels | orderBy: '-AccuracyValue') | slice:0:3 " >  <!--| orderBy: '-AccuracyValue'-->
-          <div class="card features rounded p-4">
+        <div  class="col-sm col-sm-4 mt-2 mr-0" *ngFor="let modelData of (listOfModels | orderBy: '-AccuracyValue') | slice:0:3 " >  <!--| orderBy: '-AccuracyValue'-->
+          <div class="card features rounded p-4 fixedHeightHome">
             <div class="card-body">
               <h5 class="p-1">{{modelData.model_name}}</h5>
               <div class="row p-2">
