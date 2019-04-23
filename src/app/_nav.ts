@@ -49,5 +49,10 @@ export const navItems: NavData[] = [
     name: 'Search Models',
     url: '/theme/typography',
     icon: 'fa fa-search'
+  },
+  {
+    name: ' Models',
+    url: '/theme/usermodelmenu',
+    icon: 'fa fa-folder'
   }
 ];

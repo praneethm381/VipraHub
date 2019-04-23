@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ColorsComponent } from './colors.component';
 import { TypographyComponent } from './typography.component';
+import { UsermodelmenuComponent } from './usermodelmenu.component';
+
 
 const routes: Routes = [
   {
@@ -27,6 +29,13 @@ const routes: Routes = [
         component: TypographyComponent,
         data: {
           title: 'Search Model'
+        }
+      },
+      {
+        path: 'usermodelmenu',
+        component: UsermodelmenuComponent,
+        data: {
+          title: 'Uploaded Models'
         }
       }
       // {
