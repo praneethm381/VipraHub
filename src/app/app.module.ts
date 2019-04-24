@@ -47,8 +47,6 @@ import { ViewmodeldashboardComponent } from './viewmodeldashboard/viewmodeldashb
 import {MatTabsModule, MatSidenavModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material';
 import {NgbTabset} from '@ng-bootstrap/ng-bootstrap';
-import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
-
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
@@ -112,7 +110,6 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     MatSidenavModule,
     MatTabsModule,
     MatButtonModule,
-    NgMultiSelectDropDownModule,
     CarouselModule.forRoot()
   ],
   providers: [
