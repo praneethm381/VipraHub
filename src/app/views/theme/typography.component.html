@@ -73,19 +73,36 @@
   </div>
       <div class="col-10">
         <div [hidden]="table" class="row">
-          <div  class="col-sm col-sm-4 mt-2 mr-0" *ngFor="let modelData of (vipraService.searchResults | orderBy:order)  " >
-            <div class="card features rounded p-4 fixedHeight" (click)="viewModel(modelData.id)">
+          <div  class="col-12 mt-2 mr-0" *ngFor="let modelData of (vipraService.searchResults | orderBy:order)  " >
+            <div class="card features rounded" (click)="viewModel(modelData.id)">
               <div class="card-body">
-                <h5 class="p-1">{{modelData.model_name}}</h5>
-                <div class="row p-2">
-                  <div class="col-md-auto">
-                    <b>Author</b> :  {{modelData.Author}}<br>
-                    <b>Category</b> : {{modelData.categoryID}}<br>
-                    <b>Accuracy</b> : {{modelData.AccuracyValue}}<br>
-                    <b>Optimizer</b> : {{modelData.Optimizer}}<br>
-                    <b>Framework</b> : {{modelData.framework}}<br>
-                    <b>Year</b> : {{modelData.Year}}<br>
-                    <b>Rating</b> : {{modelData.Rating}}<br>
+                <div class="row">
+                  <div class="col-5"><img src="../../../assets/image/deep_learning.jpg"/></div>
+                  <div class="col-7">
+                    <div class="row">
+                      <div class="col-10">
+                        <h3 class="p-1"><b>{{modelData.model_name}}</b></h3>
+                        <label class="pl-1">{{modelData.Year}}. {{modelData.categoryID}}</label>
+                      </div>
+                      <div class="col-2 text-center">
+                        <div class="rounded border-secondary border p-1">
+                          <i class="fa fa-star fa-lg"></i> {{modelData.Rating}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row p-2">
+                      <div class="col-md-auto">
+                        <!--<b>Author</b> :  -->
+                        The model is published by Author <b>{{modelData.Author}}</b> in the year <b>{{modelData.Year}}</b>.
+                        This model has following metadata: <br>
+                        <!--<b>Category</b> : {{modelData.categoryID}}<br>-->
+                        <b>Accuracy</b> : {{modelData.AccuracyValue}}<br>
+                        <b>Optimizer</b> : {{modelData.Optimizer}}<br>
+                        <b>Framework</b> : {{modelData.framework}}<br>
+                        <!--<b>Year</b> : {{modelData.Year}}<br>-->
+                        <!--<b>Rating</b> : {{modelData.Rating}}<br>-->
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -110,7 +127,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr data-toggle="tooltip" data-placement="right" title="Click to view model" (click)="viewModel(modelData._id)" style="pointer-events: fill;" *ngFor="let modelData of vipraService.searchResults  ">
+  <tr data-toggle="tooltip" data-placement="right" title="Click to view model" (click)="viewModel(modelData._id)" style="pointer-events: fill;" *ngFor="let modelData of (vipraService.searchResults | orderBy:order)  ">
     <th scope="row">{{modelData.categoryID}}</th>
     <td>{{modelData.model_name}}</td>
     <td>{{modelData.Author}}</td>
@@ -122,5 +139,4 @@
   </tr>
   </tbody>
 </table>
-
 
