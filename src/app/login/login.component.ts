@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         this.loggedInUserInfo.setUsers(data);
         // const userInfo = this.loggedInUserInfo.getUsers();
         // console.log(userInfo);
-        this.router.navigate(['./dashboard']);
+        this.router.navigate(['./UserHomePage']);
         // @ts-ignore
         console.log(data.message);
       } else {

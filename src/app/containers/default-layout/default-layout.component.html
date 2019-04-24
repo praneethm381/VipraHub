@@ -1,11 +1,11 @@
-<app-header
+<app-header class="bg-light"
   [navbarBrandRouterLink]="['/dashboard']"
   [fixed]="true"
   [navbarBrandFull]="{ src:'assets/image/Vipralogo.PNG', width: 89, height: 25}"
   [navbarBrandMinimized]="{ src:'assets/image/VipralogoShort.PNG',width: 30, height: 30, alt: 'VH'}"
   [sidebarToggler]="'lg'"
   [asideMenuToggler]="'lg'">
-  <div class="ml-22 col-4">
+  <div class="col-7">
     <form>
       <div class="form-row">
         <div class="col-10">
@@ -24,20 +24,19 @@
         <i class="fa fa-user fa-2x"></i>
       </a>
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
-
         <a class="dropdown-item"><i class="fa fa-user"></i> Profile</a>
         <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Logout</a>
       </div>
     </li>
   </ul>
 </app-header>
-<div class="app-body">
-  <app-sidebar [fixed]="true" [display]="'lg'">
+<div class="app-body" style="background-color:#ffffffd9">
+  <app-sidebar [fixed]="true" [display]="'lg'" style="background-color:#1c214b">
     <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="sidebarMinimized"></app-sidebar-nav>
     <app-sidebar-minimizer></app-sidebar-minimizer>
   </app-sidebar>
   <!-- Main content -->
-  <main class="main">
+  <main class="main" style="background-color: white;">
     <br/>
     <!-- Breadcrumb -->
     <!-- breaking change 'cui-breadcrumb' -->

@@ -1,14 +1,14 @@
 <!--Search-->
-<div style="background-color: white">
-  <div class="row m-1 border-bottom border-dark">
+<div>
+  <div class="row">
     <div class="col-8 text-left">
       <br>
-      <h3 m-1>Search Results</h3>
+      <h3>Search Results</h3>
     </div>
     <div class="col-4 text-right">
       <br>
       <div class="btn-group" dropdown>
-        <button dropdownToggle type="button" class="btn btn-block btn-outline-secondary active dropdown-toggle">
+        <button dropdownToggle type="button" style="background-color:#1c214bad;color: white " class="btn btn-block active dropdown-toggle">
           Sort By <span class="caret"></span>
         </button>
         <ul *dropdownMenu class="dropdown-menu" role="menu">
@@ -16,15 +16,15 @@
           <li role="menuitem"><button class="dropdown-item"  (click)="setOrder('Year')">Year</button></li>
         </ul>
       </div>
-      <i class="fa fa-th fa-lg mt-1 ml-3 mr-3" (click)="showTiles()"></i>
-      <i class="fa fa-th-list fa-lg mt-1" (click)="showGrids()"></i>
+      <i class="fa fa-th fa-lg mt-1 ml-3 mr-3" style="color:#1c214bad" (click)="showTiles()"></i>
+      <i class="fa fa-th-list fa-lg mt-1"   style="color:#1c214bad" (click)="showGrids()"></i>
     </div>
   </div>
 
 <!--Search Result-->
 
 <div class="row m-1">
-  <div class="col-2 boxshadow1">
+  <div class="col-2 card features rounded">
     <form>
       <div class="row ml-25 mt-3">
         <div class="col-12">
