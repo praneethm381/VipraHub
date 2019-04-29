@@ -3,8 +3,13 @@ import { NgModule } from '@angular/core';
 import {MatTabsModule, MatSidenavModule} from '@angular/material';
 import {ViewmodeldashboardService} from '../../viewmodeldashboard.service';
 import {ViprahubService} from "../../viprahub.service";
-import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
-
+import { FilesService } from '../../files.service';
+import { ModelsService } from '../../models.service';
+import { LoggedinUserInfoService } from '../../services/loggedin-user-info.service';
+import { saveAs } from 'file-saver';
+import * as JSZip from 'jszip';
+import { MatDialog, MatDialogRef } from "@angular/material";
+import {ProgressSpinnerDialogComponent} from '../../progress-spinner/progress-spinner-dialog.component'
 
 @NgModule({
   imports: [
@@ -18,7 +23,16 @@ import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 export class ColorsComponent implements OnInit {
   modelObj;
   modelID;
-  constructor(private viewmodelDashboardService:ViewmodeldashboardService, private viprahubService:ViprahubService) {
+  public experiment: string = "CNN011019-220151";
+
+  constructor(
+    private viewmodelDashboardService:ViewmodeldashboardService,
+    private viprahubService:ViprahubService,
+    private filesService: FilesService,
+    private modelsService: ModelsService,
+    private loggedinUserInfoService: LoggedinUserInfoService,
+    private dialog: MatDialog
+    ) {
      this.viprahubService.getModelById(localStorage.getItem('modelID')).subscribe(data=>{
        this.modelObj = data;
      });
@@ -30,12 +44,41 @@ export class ColorsComponent implements OnInit {
   ngOnInit() {
   }
 
-  downloadModel() {
+  downloadFilesInZip() {
+    var zipeFileName = this.experiment+".zip";
+    let zip: JSZip = new JSZip();
+    var folder = zip.folder(this.experiment);
+    
+    this.modelsService.getModelsBasedOnExperiment(this.loggedinUserInfoService.userInfo.emailID, this.experiment).subscribe(response => {
+      let dialogRef: MatDialogRef<ProgressSpinnerDialogComponent> = this.dialog.open(ProgressSpinnerDialogComponent, {
+        panelClass: 'transparent',
+        disableClose: true
+      });
 
-    window.open('http://localhost:4000/uploadToMongo/zipfiles');
+      if (response.length === 0) {
+        alert('Files are not found for this model name.');
+      }
+      response.map((model) => {
+        model.fileReferenceIDs.map((id) => {
+          this.filesService.getFileBasedOnFileReferenceId(id).subscribe(response => {
+            response.map((file) => {
+              this.filesService.getChunkBasedOnFileId(file.filename).subscribe(res => {
+                var fileOutput = new Blob([res], { type: file.contentType });
+                console.log(fileOutput)
+                folder.file(file.filename, fileOutput);
 
-    // this.http.get('http://localhost:4000/uploadToMongo/zipfiles').subscribe(res => {
-    //
-    // });
+                if(file.contentType == "application/octet-stream") {
+                  zip.generateAsync({type:"blob"})
+                  .then(function(content) {
+                    dialogRef.close();
+                    saveAs(content, zipeFileName);
+                  });
+                }
+              });
+            });
+          });
+        })
+      });
+    });
   }
 }

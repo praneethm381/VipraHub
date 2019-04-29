@@ -53,8 +53,15 @@ export class ModelsService {
   }
 
   getModelsBasedOnUserID(userID: string): Observable<any> {
-    console.log('inside files service getmodelsonname ' + userID);
+    console.log('inside files service getModelsBasedOnUserID ' + userID);
     return this.http.get(`${apiModels}/models?userID=` + userID, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+  getModelsBasedOnExperiment(userID: string, experiment: string): Observable<any> {
+    console.log('inside files service getModelsBasedOnExperiment ' + experiment+" "+userID);
+    return this.http.get(`${apiModels}/models?experiment=` + experiment + '&userID=' + userID, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }

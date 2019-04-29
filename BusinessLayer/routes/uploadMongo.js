@@ -22,9 +22,11 @@ router.get('/models', function (req, res, next) {
   console.log('inside models')
   var name = req.query.name;
   var userID = req.query.userID;
+  var experiment = req.query.experiment;
 
-  console.log(name)
-  console.log(userID)
+  // console.log(name)
+  // console.log(userID)
+  console.log(experiment)
 
   if ((name != undefined && name != "" && name != null) && (userID != undefined && userID != "" && userID != null)){
     console.log('both name and userID are given')
@@ -33,12 +35,18 @@ router.get('/models', function (req, res, next) {
       console.log(post)
       res.json(post);
     });
-  } else if ((userID != undefined && userID != "" && userID != null)){
+  } else if ((userID != undefined && userID != "" && userID != null) && (experiment == undefined) ){
     console.log('userId is given')
     uploadFile.find({"userId": userID}, function (err,post){
       if (err) return next(err);
       console.log(post)
       res.json(post);
+    });
+  } else if((userID != undefined && userID != "" && userID != null) && (experiment != undefined && experiment != "" && experiment != null)) {
+    console.log('when experiment is given')
+    uploadFile.find({"userId": userID, "experiment": experiment}, function (err, data) {
+      if (err) return next(err);
+      res.json(data);
     });
   } else if((name == undefined ) && (userID == undefined)) {
     console.log('name and userId are not given')
@@ -88,7 +96,8 @@ router.get('/files/:fileReferenceID', function(req, res, next){
   });
 });
 
-router.get('/chunks/:fileID', function(req, res, next){
+router.get('/chunks/:fileName', function(req, res, next){
+  console.log(req.params)
   console.log("inside routes for fileID")
   let filesData = [];
   let count = 0;
@@ -97,7 +106,7 @@ router.get('/chunks/:fileID', function(req, res, next){
   var gfs = Grid(conn.db, mongoose.mongo);
   gfs.collection('uploadFiles'); // set the collection to look up into
   console.log(req.params.fileID);
-  gfs.files.findOne({ filename: "LSTM_011019-173749_architecture.jpg" }, (err, file) => {
+  gfs.files.findOne({ filename: req.params.fileName }, (err, file) => {
     // Check if the input is a valid image or not
     if (!file || file.length === 0) {
       return res.status(404).json({
@@ -106,15 +115,18 @@ router.get('/chunks/:fileID', function(req, res, next){
     }
 
     // If the file exists then check whether it is an image
-    if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
+    // if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
       // Read output to browser
       const readstream = gfs.createReadStream(file.filename);
+      console.log("file content ====================")
+      console.log(file);
+      res.set('Content-Type', file.contentType)
       readstream.pipe(res);
-    } else {
-      res.status(404).json({
-        err: 'Not an image'
-      });
-    }
+    // } else {
+    //   res.status(404).json({
+    //     err: 'Not an image'
+    //   });
+    // }
   });
 });
 

@@ -56,8 +56,8 @@ export class FilesService {
       catchError(this.handleError));
   }
 
-  getChunkBasedOnFileId(fileID: any): Observable<any> {
-    console.log("inside files service based on getChunkBasedOnFileId"+`${apiChunks}/${fileID}`);
-    return this.http.get(`${apiChunks}/${fileID}`, {responseType: 'blob'});
+  getChunkBasedOnFileId(fileName: any): Observable<any> {
+    console.log("inside files service based on getChunkBasedOnFileId"+`${apiChunks}/${fileName}`);
+    return this.http.get(`${apiChunks}/${fileName}`, {responseType: 'blob'});
   }
 }

@@ -6,7 +6,7 @@
 <!--Model Overview-->
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">{{modelObj.model_name}}</h5>
+    <h5 class="card-title">Experiment</h5>
     <div class="pull-right">
       <span class="fa fa-star checked"></span>
       <span class="fa fa-star checked"></span>
@@ -16,7 +16,7 @@
     </div>
     <h6 class="card-subtitle mb-2 text-muted">{{modelObj.categoryID}}</h6>
     <p class="card-text"></p>
-    <button mat-flat-button style="background-color: #1c214bad;color: white" (click)="downloadModel()"> <i class="fa fa-download"></i> Download</button>
+    <button mat-flat-button style="background-color: #1c214bad;color: white" (click)="downloadFilesInZip()" target="_blank"> <i class="fa fa-download"></i> Download</button>
   </div>
 </div>
 <!--Model detailed view-->
